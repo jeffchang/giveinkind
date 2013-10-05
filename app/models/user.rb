@@ -3,8 +3,8 @@ class User < ActiveRecord::Base
   has_many :needs
   has_many :needed_items, through: :needs
   has_one :collection_spot
-  has_many :locations
   has_many :donor_items
+  has_and_belongs_to_many :locations
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,

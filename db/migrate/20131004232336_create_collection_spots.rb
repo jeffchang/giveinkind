@@ -9,8 +9,7 @@ class CreateCollectionSpots < ActiveRecord::Migration
       t.string :postcode
       t.string :country
       t.string :coords
-      t.references :donor_item
-      t.references :user
+      t.string :directions
 
       t.timestamps
     end

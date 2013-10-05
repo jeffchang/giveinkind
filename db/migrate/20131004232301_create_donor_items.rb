@@ -11,6 +11,8 @@ class CreateDonorItems < ActiveRecord::Migration
       t.references :subcategory
       t.references :user
       t.references :need
+      t.references :location
+      t.references :collection_spot
 
       t.timestamps
     end

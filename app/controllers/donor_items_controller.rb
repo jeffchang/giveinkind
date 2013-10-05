@@ -25,32 +25,19 @@ class DonorItemsController < ApplicationController
   end
 
   def update
-    # @story_params = {}
-    # @story = Story.find(params[:id])
-    # if @story.user == current_user
-    #   process_upload
-    #   if params[:story] && params[:story][:upload]
-    #     edit_page_upload
-    #     flash.now[:success] = "File uploaded! Please edit for formatting as you see fit."
-    #     render :edit
-    #   else
-    #     update_story
-    #     update_node
-    #     if @story.update_attributes(@story_params)
-    #       redirect_to story_path(@story.node), :notice => "#{@story.title} was updated successfully."
-    #     else
-    #       render :edit, :alert => "Updates could not be saved. Please see the errors below."
-    #     end
-    #   end
-    # else
-    #   redirect_to profile_path(current_user), :notice => "You don't own this part of the story!"
-    # end
+    @donor_item = DonorItem.find(params[:id])
+    if @donor_item.user == current_user
+      update_donor_item
+      redirect_to donor_item_path(@donor_item), :notice => "#{@donor_item.name} was updated successfully."
+    else
+      redirect_to profile_path(current_user), :notice => "This isn't one of your donations!"
+    end
   end
 
   def destroy
-    # story = Story.find(params[:id])
-    # story.destroy
-    # redirect_to stories_path, :notice => "Story removed successfully."
+    @donor_item = DonorItem.find(params[:id])
+    @donor_item.destroy
+    redirect_to profile_path(current_user), :notice => "Donation removed successfully."
   end
 
   private

@@ -1,21 +1,21 @@
-class CollectionSpotsController < ApplicationController
+class LocationsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
-    @collection_spots = CollectionSpot.all
+    @locations = current_user.locations
   end
 
   def show
-   @collection_spot = CollectionSpot.find(params[:id])
+   @location = Location.find(params[:id])
   end
 
   def new
-    @collection_spot = CollectionSpot.new
+    @location = Location.new
   end
 
   def create
-    @collection_spot = CollectionSpot.create(collection_spot_params)
-    redirect_to collection_spots_path, :notice => "#{@collection_spot.name} was added successfully."
+    @location = Location.create(location_params)
+    redirect_to locations_path, :notice => "#{@location.name} was added successfully."
   end
 
   def edit
@@ -54,7 +54,7 @@ class CollectionSpotsController < ApplicationController
 
   private
 
-  # def node_params
-  #   params.require(:node).permit(:title, :content, :parent_node)
-  # end
+  def location_params
+    params.require(:node).permit(:name, :address_1, :address_2, :city, :region_state, :postcode, :country, :coords)
+  end
 end

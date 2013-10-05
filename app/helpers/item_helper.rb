@@ -27,6 +27,18 @@ module ItemHelper
     @existing_story = @need.story
     @existing_status = @need.complete
     @existing_thanks = @need.thanks
-  end  
+  end
+
+  def update_needed_item
+    @needed_item.update_attributes(needed_item_params)
+  end
+
+  def update_donor_item
+    @donor_item.update_attributes(donor_item_params)
+  end
+
+  def update_need
+    @need.update_attributes(need_params)
+  end
 
 end

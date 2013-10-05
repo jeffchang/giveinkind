@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131004232426) do
+ActiveRecord::Schema.define(version: 20131005132542) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,8 +31,7 @@ ActiveRecord::Schema.define(version: 20131004232426) do
     t.string   "postcode"
     t.string   "country"
     t.string   "coords"
-    t.integer  "donor_item_id"
-    t.integer  "user_id"
+    t.string   "directions"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -48,6 +47,8 @@ ActiveRecord::Schema.define(version: 20131004232426) do
     t.integer  "subcategory_id"
     t.integer  "user_id"
     t.integer  "need_id"
+    t.integer  "location_id"
+    t.integer  "collection_spot_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -61,10 +62,13 @@ ActiveRecord::Schema.define(version: 20131004232426) do
     t.string   "postcode"
     t.string   "country"
     t.string   "coords"
-    t.integer  "donor_item_id"
-    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "locations_users", force: true do |t|
+    t.integer "location_id"
+    t.integer "user_id"
   end
 
   create_table "needed_items", force: true do |t|
@@ -118,6 +122,7 @@ ActiveRecord::Schema.define(version: 20131004232426) do
     t.string   "preferred_email"
     t.string   "image_url"
     t.boolean  "facilitator"
+    t.integer  "collection_spot_id"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

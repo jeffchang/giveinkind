@@ -9,8 +9,6 @@ class CreateLocations < ActiveRecord::Migration
       t.string :postcode
       t.string :country
       t.string :coords
-      t.references :donor_item
-      t.references :user
 
       t.timestamps
     end
