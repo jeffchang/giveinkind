@@ -11,8 +11,8 @@ Giveinkind::Application.routes.draw do
   resources :profiles, :only => [:show]
 
   post "needed_items/search" => "needed_items#search"
-  get "needed_items/update_subcategories" => "needed_items#update_subcategories"
-  get "donor_items/update_subcategories" => "donor_items#update_subcategories"
+  post "needed_items/update_subcategories" => "needed_items#update_subcategories"
+  post "donor_items/update_subcategories" => "donor_items#update_subcategories"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
