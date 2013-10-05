@@ -10,7 +10,7 @@ class CreateLocations < ActiveRecord::Migration
       t.string :country
       t.string :coords
       t.references :donor_item
-      t.references :user
+      t.references :donor
 
       t.timestamps
     end

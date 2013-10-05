@@ -1,0 +1,7 @@
+<%= form_for @need do |n| %>
+  <%= n.text_field :title %>
+  <%= n.text_area :story, class: "tinymce" %>
+  <%= tinymce %>
+  <p></p>
+  <%= n.submit %>
+<% end %>

@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20131004232426) do
     t.string   "country"
     t.string   "coords"
     t.integer  "donor_item_id"
-    t.integer  "user_id"
+    t.integer  "donor_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20131004232426) do
     t.datetime "pickup_details"
     t.text     "thanks"
     t.integer  "subcategory_id"
-    t.integer  "user_id"
+    t.integer  "donor_id"
     t.integer  "need_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 20131004232426) do
     t.string   "country"
     t.string   "coords"
     t.integer  "donor_item_id"
-    t.integer  "user_id"
+    t.integer  "donor_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(version: 20131004232426) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "preferred_email"
+    t.string   "image_url"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

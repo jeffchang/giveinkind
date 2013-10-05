@@ -1,45 +1,60 @@
-<nav class="top-bar">
-  <ul class="title-area">
-    <!-- Title -->
-    <li class="name">
-      <%= image_tag '/logo.gif' %>
-      <h1>GiveInKind</h1>
-    </li>
-    <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
-  </ul>
-
-  <% if current_user %>
-    <section class="top-bar-section">
-      <ul class="left">
-        <li><%= link_to "Browse Stories", stories_path %></li>
-      </ul>
-
-      <ul class="right">
-        <li><%= link_to "Create a Story", new_story_path %></li>
-        <li><%= link_to "My Profile", profile_path(current_user) %></li>
-        <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
-      </ul>
-    </section>
-  <% else %>
-    <div class='welcome_options'>
-      <button id='sign_in'>Sign in</button>
-      <button id='sign_up'>Sign up</button>
+<!-- HEADER AREA -->
+<header class="full-width header-area">
+    <div class="row">
+        <div class="large-12 columns">
+          <%= image_tag '/logo.gif' %>
+          <h1>Give In Kind</h1>
+        </div>
     </div>
+</header>
 
-    <div class='sign_in_links', style='display:none;'>
-      <%= link_to "Sign in with Twitter", user_omniauth_authorize_path('twitter'), {:class => 'button welcome-button'} %><br>
-      <%= link_to "Sign in with Facebook",user_omniauth_authorize_path('facebook'), {:class => 'button welcome-button'} %><br>
-      <%= link_to "Sign in with email", new_user_session_path, {:class => 'button welcome-button', :data => { :'reveal-id' => 'modalContainer', :'reveal-ajax' => "true"} } %>
+<!-- NAVIGATION AREA -->
+<div class="full-width navigation-area">
+    <div class="row">
+        <div class="large-12 columns">
+            <nav class="top-bar">
+                <ul class="title-area">
+                <!-- Title Area -->
+                    <li class="name"></li>
+                    <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+                    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+                </ul>
+                <!-- The Section wrap -->
+                <section class="top-bar-section">
+                    <!-- Left Nav Section -->
+                    <ul class="left">
+                        <li><a href="#">Find Needs</a></li>
+                        <li><a href="#">Why Give?</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <% if current_user %>
+                            <li><%= link_to "My Profile", profile_path(current_user) %></li>
+                            <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+                        <% else %>
+                            <li class="has-dropdown">
+                                <a href="#">Sign In</a>
+                                <ul class="dropdown">
+                                    <li><%= link_to "Sign in with Twitter", user_omniauth_authorize_path('twitter'), {:class => 'button welcome-button'} %></li>
+                                    <li><%= link_to "Sign in with Facebook",user_omniauth_authorize_path('facebook'), {:class => 'button welcome-button'} %></li>
+                                    <li><%= link_to "Sign in with LinkedIn",user_omniauth_authorize_path('linkedin'), {:class => 'button welcome-button'} %></li>
+                                    <li><%= link_to "Sign in with Email", new_user_session_path, {:class => 'button welcome-button', :data => { :'reveal-id' => 'modalContainer', :'reveal-ajax' => "true"} } %></li>
+                                </ul>
+                            </li>
+                            <li class="has-dropdown">
+                                <a href="#">SIGN UP</a>
+                                <ul class="dropdown">
+                                    <li><%= link_to "Sign up with Twitter", user_omniauth_authorize_path('twitter'), {:class => 'button welcome-button'} %></li>
+                                    <li><%= link_to "Sign up with Facebook",user_omniauth_authorize_path('facebook'), {:class => 'button welcome-button'} %></li>
+                                    <li><%= link_to "Sign up with LinkedIn",user_omniauth_authorize_path('linkedin'), {:class => 'button welcome-button'} %></li>
+                                    <li><%= link_to "Sign up with Email", new_user_registration_path, {:class => 'button welcome-button', :data => { :'reveal-id' => 'modalContainer', :'reveal-ajax' => "true"} } %></li>
+                                </ul>
+                          </li>
+                      <% end %>
+                  </ul>
+                  <!-- Right Nav Section -->
+                  <ul class="right"></ul>
+              </section>
+          </nav>
+        </div>
     </div>
-
-    <div class='sign_up_links', style='display:none;'>
-      <%= link_to "Sign up with Twitter", user_omniauth_authorize_path('twitter'), {:class => 'button welcome-button'} %><br>
-      <%= link_to "Sign up with Facebook",user_omniauth_authorize_path('facebook'), {:class => 'button welcome-button'} %><br>
-      <%= link_to "Sign up with email", new_user_registration_path, {:class => 'button welcome-button', :data => { :'reveal-id' => 'modalContainer', :'reveal-ajax' => "true"} } %>
-    </div>
-  <% end %>
-
-</nav>
-
-<h4>Create literature, together</h4>
-<h5><blockquote>In literature, as in love, we are astonished at what is chosen by others. <cite>Andre Maurois </cite></blockquote></h5>
+</div>

@@ -8,6 +8,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     handle_oauth("Twitter")
   end
 
+  def linkedin
+    handle_oauth("LinkedIn")
+  end
+
   private
   def handle_oauth(provider)
     @user = User.find_or_create_from_oauth(request.env["omniauth.auth"])

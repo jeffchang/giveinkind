@@ -4,8 +4,7 @@ Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
-  config.secret_key = '2dc47876b5aea63e0a88b7fa4fa12fd0aeec3c8ad7aaa6394242da7b8da50d8a250fef8eb3f957f88126e2b437e558518d7c117eec357d129cfb7f5c67197805'
-
+  config.secret_key = 'c19ed3e87d0c9f0c90066f33d9f6c03f35c4ce01759c4adb87a818a36733dfe105db6e091a72e38fdb166355da9e6fdfb6f4ea5a82060f4b45589a7fa83a6a21'
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
@@ -234,7 +233,7 @@ Devise.setup do |config|
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
   config.omniauth :twitter, ENV['TWITTER_CONSUMER_KEY'], ENV['TWITTER_CONSUMER_SECRET']
   config.omniauth :facebook, ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_APP_SECRET']
-
+  config.omniauth :linkedin, ENV['LINKEDIN_API_KEY'], ENV['LINKEDIN_API_SECRET']
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
