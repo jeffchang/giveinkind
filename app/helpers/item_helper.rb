@@ -29,6 +29,27 @@ module ItemHelper
     @existing_thanks = @need.thanks
   end
 
+  def populate_location_edit_fields
+    @existing_name = @location.name
+    @existing_address_1 = @location.address_1
+    @existing_address_2 = @location.address_2
+    @existing_city = @location.city
+    @existing_region_state = @location.region_state
+    @existing_postcode = @location.postcode
+    @existing_country = @location.country
+  end
+
+  def populate_collection_spot_edit_fields
+    @existing_name = @location.name
+    @existing_address_1 = @location.address_1
+    @existing_address_2 = @location.address_2
+    @existing_city = @location.city
+    @existing_region_state = @location.region_state
+    @existing_postcode = @location.postcode
+    @existing_country = @location.country
+    @existing_directions = @location.directions
+  end
+
   def update_needed_item
     @needed_item.update_attributes(needed_item_params)
   end

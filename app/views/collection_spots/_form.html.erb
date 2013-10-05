@@ -1,0 +1,12 @@
+<%= form_for @collection_spot do |c| %>
+  <%= c.text_field :name, value: name %>
+  <%= c.text_field :address_1, value: address_1 %>
+  <%= c.text_field :address_2, value: address_2 %>
+  <%= c.text_field :city, value: city %>
+  <%= c.text_field :region_state, value: region_state %>
+  <%= c.text_field :postcode, value: postcode %>
+  <%= c.text_field :country, value: country %>
+  <%= c.text_field :directions, value: directions %>
+  <p></p>
+  <%= l.submit %>
+<% end %>

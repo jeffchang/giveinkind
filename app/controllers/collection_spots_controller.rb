@@ -19,8 +19,8 @@ class CollectionSpotsController < ApplicationController
   end
 
   def edit
-    # @story = Node.find(params[:id]).stories.first
-    # populate_edit_fields
+    @collection_spot = CollectionSpot.find(params[:id])
+    populate_collection_spot_edit_fields
   end
 
   def update

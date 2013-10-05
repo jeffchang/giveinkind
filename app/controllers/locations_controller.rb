@@ -19,8 +19,8 @@ class LocationsController < ApplicationController
   end
 
   def edit
-    # @story = Node.find(params[:id]).stories.first
-    # populate_edit_fields
+    @location = Location.find(params[:id])
+    populate_location_edit_fields
   end
 
   def update
