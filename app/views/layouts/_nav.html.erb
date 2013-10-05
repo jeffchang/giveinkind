@@ -23,7 +23,8 @@
                 <section class="top-bar-section">
                     <!-- Left Nav Section -->
                     <ul class="left">
-                        <li><a href="#">Find Needs</a></li>
+                        <li><%= link_to "Needs", needs_path %></li>
+                        <li><%= link_to "All Needed Items", needed_items_path %></li>
                         <li><a href="#">Why Give?</a></li>
                         <li><a href="#">Success Stories</a></li>
                         <li><a href="#">About Us</a></li>
@@ -41,7 +42,7 @@
                                 </ul>
                             </li>
                             <li class="has-dropdown">
-                                <a href="#">SIGN UP</a>
+                                <a href="#">Sign Up</a>
                                 <ul class="dropdown">
                                     <li><%= link_to "Sign up with Twitter", user_omniauth_authorize_path('twitter'), {:class => 'button welcome-button'} %></li>
                                     <li><%= link_to "Sign up with Facebook",user_omniauth_authorize_path('facebook'), {:class => 'button welcome-button'} %></li>

@@ -41,4 +41,9 @@ module ItemHelper
     @need.update_attributes(need_params)
   end
 
+  def categories_and_subcategories
+    @categories = Category.all
+    @subcategories = Subcategory.all
+  end
+
 end

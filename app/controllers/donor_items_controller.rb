@@ -2,6 +2,7 @@ class DonorItemsController < ApplicationController
 
   def index
     @donor_items = DonorItem.all
+    categories_and_subcategories
   end
 
   def show
@@ -10,6 +11,7 @@ class DonorItemsController < ApplicationController
 
   def new
     @donor_item = DonorItem.new
+    categories_and_subcategories
   end
 
   def create
@@ -23,6 +25,7 @@ class DonorItemsController < ApplicationController
   def edit
     @donor_item = DonorItem.find(params[:id])
     populate_donor_item_edit_fields
+    categories_and_subcategories
   end
 
   def update
@@ -39,6 +42,14 @@ class DonorItemsController < ApplicationController
     @donor_item = DonorItem.find(params[:id])
     @donor_item.destroy
     redirect_to profile_path(current_user), :notice => "Donation removed successfully."
+  end
+
+  def update_subcategories
+    category = Category.find(params[:category_id])
+    subcategories = category.subcategories
+    render :update do |page|
+      page.replace_html 'subcategories', :partial => 'subcategories', :object => subcategories
+    end
   end
 
   private

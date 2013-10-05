@@ -3,6 +3,7 @@ class NeededItemsController < ApplicationController
 
   def index
     @needed_items = NeededItem.all
+    categories_and_subcategories
   end
 
   def show
@@ -11,6 +12,7 @@ class NeededItemsController < ApplicationController
 
   def new
     @needed_item = NeededItem.new
+    categories_and_subcategories
   end
 
   def create
@@ -23,6 +25,7 @@ class NeededItemsController < ApplicationController
 
   def edit
     @needed_item = NeededItem.find(params[:id])
+    categories_and_subcategories
     populate_needed_item_edit_fields
   end
 
@@ -48,6 +51,14 @@ class NeededItemsController < ApplicationController
       redirect_to need_path(need), :notice => "Needed item removed successfully."
     else
       redirect_to profile_path(current_user), :notice => "Needed item removed successfully."
+    end
+  end
+
+  def update_subcategories
+    category = Category.find(params[:category_id])
+    subcategories = category.subcategories
+    render :update do |page|
+      page.replace_html 'subcategories', :partial => 'subcategories', :object => subcategories
     end
   end
 

@@ -57,5 +57,5 @@ gem 'omniauth-linkedin'
 gem 'tinymce-rails'
 gem 'sanitize'
 gem 'gravatar_image_tag'
-
+gem 'prototype-rails'
 gem 'introjs-rails'
