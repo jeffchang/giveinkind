@@ -1,27 +1,11 @@
 <div class="row">
-  <% donor_items_count = @donor_items.length %>
-  <% donor_items_per_row = donor_items_count / 3 %>
 
   <% if @donor_items.length > 0 %>
     <div class="small-4 columns">
-      <% @donor_items[0...donor_items_per_row].each do |donor_item| %>
+      <% @donor_items.each do |donor_item| %>
         <h4><%= link_to donor_item.name, donor_item_path(donor_item) %></h4>
         <p><i>Written by <%= donor_item.user.name %></i></p>
       <% end %>
-    </div>
-
-    <div class="small-4 columns">
-    <% @donor_items[donor_items_per_row...donor_items_per_row*2].each do |donor_item| %>
-        <h4><%= link_to donor_item.name, donor_item_path(donor_item) %></h4>
-        <p><i>Started by <%= donor_item.user.name %></i></p>
-    <% end %>
-    </div>
-
-    <div class="small-4 columns">
-    <% @donor_items[donor_items_per_row*2...donor_items_per_row*3].each do |donor_item| %>
-        <h4><%= link_to donor_item.name, donor_item_path(donor_item) %></h4>
-        <p><i>Started by <%= donor_item.user.name %></i></p>
-    <% end %>
     </div>
 
   <% else %>
