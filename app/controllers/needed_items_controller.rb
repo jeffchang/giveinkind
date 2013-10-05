@@ -10,29 +10,19 @@ class NeededItemsController < ApplicationController
   end
 
   def new
-    # @parent_node = params[:id] if params[:id]
-    # @story = Story.new
-    # @story.build_node
+    @needed_item = NeededItem.new
   end
 
   def create
-    # story_params = {}
-    # process_upload
-    # story_params[:title] = node_params[:title]
-    # @story = Story.new(story_params)
-    # @story.user = current_user
-    # create_nodes
-    # @story.tag_list = params[:story][:tag_list]
-    # if @story.save
-    #   redirect_to story_path(@story), :notice => "#{@story.title} was created successfully."
-    # else
-    #   render :new, :alert => "Story could not be saved. Please see the errors below."
-    # end
+    @needed_item = NeededItem.create(needed_item_params)
+    @needed_item.still_needed = 2
+    @needed_item.save
+    redirect_to new_needed_item_path, :notice => "#{@needed_item.name} was added successfully."
   end
 
   def edit
-    # @story = Node.find(params[:id]).stories.first
-    # populate_edit_fields
+    @needed_item = NeededItem.find(params[:id])
+    populate_needed_item_edit_fields
   end
 
   def update
@@ -66,7 +56,7 @@ class NeededItemsController < ApplicationController
 
   private
 
-  # def node_params
-  #   params.require(:node).permit(:title, :content, :parent_node)
-  # end
+  def needed_item_params
+    params.require(:needed_item).permit(:name, :description, :image_url, :oversized, :subcategory_id, :need_id)
+  end
 end

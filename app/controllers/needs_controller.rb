@@ -6,33 +6,23 @@ class NeedsController < ApplicationController
   end
 
   def show
-   @need = Need.find(params[:id])
+    @need = Need.find(params[:id])
   end
 
   def new
-    # @parent_node = params[:id] if params[:id]
-    # @story = Story.new
-    # @story.build_node
+    @need = Need.new
   end
 
   def create
-    # story_params = {}
-    # process_upload
-    # story_params[:title] = node_params[:title]
-    # @story = Story.new(story_params)
-    # @story.user = current_user
-    # create_nodes
-    # @story.tag_list = params[:story][:tag_list]
-    # if @story.save
-    #   redirect_to story_path(@story), :notice => "#{@story.title} was created successfully."
-    # else
-    #   render :new, :alert => "Story could not be saved. Please see the errors below."
-    # end
+    @need = Need.create(need_params)
+    @need.user = current_user
+    @need.complete = 0
+    @need.save
   end
 
   def edit
-    # @story = Node.find(params[:id]).stories.first
-    # populate_edit_fields
+    @need = Need.find(params[:id])
+    populate_need_edit_fields
   end
 
   def update
@@ -66,7 +56,7 @@ class NeedsController < ApplicationController
 
   private
 
-  # def node_params
-  #   params.require(:node).permit(:title, :content, :parent_node)
-  # end
+  def need_params
+    params.require(:need).permit(:title, :story)
+  end
 end

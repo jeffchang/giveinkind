@@ -10,7 +10,7 @@ class CreateCollectionSpots < ActiveRecord::Migration
       t.string :country
       t.string :coords
       t.references :donor_item
-      t.references :donor
+      t.references :user
 
       t.timestamps
     end

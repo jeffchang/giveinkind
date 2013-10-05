@@ -10,9 +10,7 @@ class CollectionSpotsController < ApplicationController
   end
 
   def new
-    # @parent_node = params[:id] if params[:id]
-    # @story = Story.new
-    # @story.build_node
+    @collection_spot = CollecitonSpot.new
   end
 
   def create

@@ -5,33 +5,23 @@ class DonorItemsController < ApplicationController
   end
 
   def show
-   @donor_item = DonorItem.find(params[:id])
+    @donor_item = DonorItem.find(params[:id])
   end
 
   def new
-    # @parent_node = params[:id] if params[:id]
-    # @story = Story.new
-    # @story.build_node
+    @donor_item = DonorItem.new
   end
 
   def create
-    # story_params = {}
-    # process_upload
-    # story_params[:title] = node_params[:title]
-    # @story = Story.new(story_params)
-    # @story.user = current_user
-    # create_nodes
-    # @story.tag_list = params[:story][:tag_list]
-    # if @story.save
-    #   redirect_to story_path(@story), :notice => "#{@story.title} was created successfully."
-    # else
-    #   render :new, :alert => "Story could not be saved. Please see the errors below."
-    # end
+    @donor_item = DonorItem.create(donor_item_params)
+    @donor_item.awaiting_pickup = 2
+    @donor_item.save
+    redirect_to new_donor_item_path, :notice => "#{@donor_item.name} was added successfully."
   end
 
   def edit
-    # @story = Node.find(params[:id]).stories.first
-    # populate_edit_fields
+    @donor_item = DonorItem.find(params[:id])
+    populate_donor_item_edit_fields
   end
 
   def update
@@ -65,7 +55,7 @@ class DonorItemsController < ApplicationController
 
   private
 
-  # def node_params
-  #   params.require(:node).permit(:title, :content, :parent_node)
-  # end
+  def donor_item_params
+    params.require(:donor_item).permit(:name, :description, :oversized, :pickup_details, :subcategory_id, :need_id)
+  end
 end

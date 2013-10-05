@@ -9,7 +9,7 @@ class CreateDonorItems < ActiveRecord::Migration
       t.datetime :pickup_details
       t.text :thanks
       t.references :subcategory
-      t.references :donor
+      t.references :user
       t.references :need
 
       t.timestamps

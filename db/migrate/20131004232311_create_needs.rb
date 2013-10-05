@@ -5,7 +5,7 @@ class CreateNeeds < ActiveRecord::Migration
       t.text :story
       t.integer :complete
       t.text :thanks
-      t.references :facilitator
+      t.references :user
 
       t.timestamps
     end

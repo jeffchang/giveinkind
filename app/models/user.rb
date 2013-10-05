@@ -1,5 +1,11 @@
 class User < ActiveRecord::Base
 
+  has_many :needs
+  has_many :needed_items, through: :needs
+  has_one :collection_spot
+  has_many :locations
+  has_many :donor_items
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook, :twitter, :linkedin]
@@ -24,7 +30,8 @@ class User < ActiveRecord::Base
                            uid:auth.uid,
                            email:auth.info.email,
                            password:Devise.friendly_token[0,20],
-                           image_url: auth.info.image.gsub("square", "large")
+                           image_url: auth.info.image.gsub("square", "large"),
+                           facilitator: true
                            )
     end
     user
