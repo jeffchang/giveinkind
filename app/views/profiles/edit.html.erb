@@ -1,0 +1,43 @@
+<div id="row">
+  <div class="small-12 columns">
+    <h3>Upload a new photo, or paste in an image URL:</h3>
+    <!-- Need to add photo uploading / URL changing functionality -->
+    <br><br>
+    <h3>Here's a list of your preferred locations:</h3>
+    <% unless @user.locations.empty? %>
+      <%= @user.locations.each do |location| %>
+        <h4><%= location.name %></h4>
+        <%= location.address_1 %>
+        <%= location.address_2 %>
+        <%= location.city %>
+        <%= location.region_states %>
+        <%= location.postcode %>
+        <%= location.country %>
+        <%= link_to "Edit", edit_location_path(location), class: "success button small round" %>
+        <%= link_to "Delete", location_path(location), method: :delete, class: "alert button small round" %>
+        <br><br>
+      <% end %>
+    <% else %>
+      <h4>No locations found!</h4>
+    <% end %>
+    <%= link_to "New Location", new_location_path, class: "success button large round" %>
+
+    <br><br>
+    <h3>Here's your current preferred collection spot:</h3>
+    <% unless @user.collection_spot.empty? %>
+      <% collection_spot = @user.collection_spot %>
+      <h4><%= collection_spot.name %></h4>
+      <%= collection_spot.address_1 %>
+      <%= collection_spot.address_2 %>
+      <%= collection_spot.city %>
+      <%= collection_spot.region_states %>
+      <%= collection_spot.postcode %>
+      <%= collection_spot.country %>
+      <br><br>
+      <% end %>
+    <% else %>
+      <h4>No preferred collection spot found!</h4>
+    <% end %>
+    <!-- Need a way of picking a collection spot (dropdown menu with AJAX?) -->
+  </div>
+</div>

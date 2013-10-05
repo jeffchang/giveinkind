@@ -24,32 +24,23 @@ class LocationsController < ApplicationController
   end
 
   def update
-    # @story_params = {}
-    # @story = Story.find(params[:id])
-    # if @story.user == current_user
-    #   process_upload
-    #   if params[:story] && params[:story][:upload]
-    #     edit_page_upload
-    #     flash.now[:success] = "File uploaded! Please edit for formatting as you see fit."
-    #     render :edit
-    #   else
-    #     update_story
-    #     update_node
-    #     if @story.update_attributes(@story_params)
-    #       redirect_to story_path(@story.node), :notice => "#{@story.title} was updated successfully."
-    #     else
-    #       render :edit, :alert => "Updates could not be saved. Please see the errors below."
-    #     end
-    #   end
-    # else
-    #   redirect_to profile_path(current_user), :notice => "You don't own this part of the story!"
-    # end
+    @location = Location.find(params[:id])
+    if current_user.locations.include? @location
+      update_location
+      redirect_to profile_edit_path(current_user), :notice => "#{@location.name} was updated successfully."
+    else
+      redirect_to profile_edit_path(current_user), :notice => "This isn't one of your locations!"
+    end
   end
 
   def destroy
-    # story = Story.find(params[:id])
-    # story.destroy
-    # redirect_to stories_path, :notice => "Story removed successfully."
+    @location = Location.find(params[:id])
+    if current_user.locations.include? @location
+      @location.destroy
+      redirect_to profile_edit_path(current_user), :notice => "#{@location.name} was removed successfully."
+    else 
+      redirect_to profile_edit_path(current_user, :notice => "This isn't one of your locations!"
+    end
   end
 
   private

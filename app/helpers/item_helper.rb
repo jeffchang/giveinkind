@@ -62,6 +62,14 @@ module ItemHelper
     @need.update_attributes(need_params)
   end
 
+  def update_location
+    @location.update_attributes(location_params)
+  end
+
+  def update_collection_spot
+    @collection_spot.update_attributes(collection_spot_params)
+  end
+
   def categories_and_subcategories
     @categories = Category.all
     @subcategories = Subcategory.all

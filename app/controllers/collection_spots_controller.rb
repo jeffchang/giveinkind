@@ -24,32 +24,23 @@ class CollectionSpotsController < ApplicationController
   end
 
   def update
-    # @story_params = {}
-    # @story = Story.find(params[:id])
-    # if @story.user == current_user
-    #   process_upload
-    #   if params[:story] && params[:story][:upload]
-    #     edit_page_upload
-    #     flash.now[:success] = "File uploaded! Please edit for formatting as you see fit."
-    #     render :edit
-    #   else
-    #     update_story
-    #     update_node
-    #     if @story.update_attributes(@story_params)
-    #       redirect_to story_path(@story.node), :notice => "#{@story.title} was updated successfully."
-    #     else
-    #       render :edit, :alert => "Updates could not be saved. Please see the errors below."
-    #     end
-    #   end
-    # else
-    #   redirect_to profile_path(current_user), :notice => "You don't own this part of the story!"
-    # end
+    @collection_spot = CollectionSpot.find(params[:id])
+    if current_user.facilitator
+      update_collection_spot
+      redirect_to profile_edit_path(current_user), :notice => "#{@collection_spot.name} was updated successfully."
+    else
+      redirect_to profile_edit_path(current_user), :notice => "I'm sorry, only facilitators can change collection spots."
+    end
   end
 
   def destroy
-    # story = Story.find(params[:id])
-    # story.destroy
-    # redirect_to stories_path, :notice => "Story removed successfully."
+    @collection_spot = CollectionSpot.find(params[:id])
+    if current_user.facilitator
+      @collection_spot.destroy
+      redirect_to profile_edit_path(current_user), :notice => "#{@collection_spot.name} was updated successfully."
+    else
+      redirect_to profile_edit_path(current_user), :notice => "I'm sorry, only facilitators can remove collection spots."
+    end
   end
 
   private
