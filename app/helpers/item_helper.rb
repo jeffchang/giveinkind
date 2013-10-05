@@ -17,7 +17,7 @@ module ItemHelper
     @existing_description = @needed_item.description
     @existing_status = @needed_item.still_needed
     @existing_image = @needed_item.image_url
-    @existing_oversized = @donor_item.oversized
+    @existing_oversized = @needed_item.oversized
     @existing_subcategory = @needed_item.subcategory_id
     @existing_need_id = @needed_item.need_id
   end

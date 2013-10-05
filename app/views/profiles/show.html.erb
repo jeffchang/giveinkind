@@ -35,7 +35,7 @@
       </div>
       <div class="small-6 columns">
         <h3 class='profile-list-headers'>Additional Needed Items</h3>
-        <% @independent_items = @user.needed_items.select {|needed_item| needed_item.need == nil} %>
+        <% @independent_items = NeededItem.where(:user => current_user, :need_id => nil) %>
         <% unless @independent_items.empty? %>
           <% @independent_items.each do |needed_item| %>
             <h5><%= link_to needed_item.name, needed_item_path(needed_item) %></h5>
@@ -65,7 +65,7 @@
           <h5><%= link_to donor_item.name, donor_item_path(donor_item) %></h5>
           <div>
             <%= link_to "Edit", edit_donor_item_path(donor_item), class: "success button small round" %>
-            <%= link_to "Delete", needed_item_path(needed_item), method: :delete, class: "alert button small round" %>
+            <%= link_to "Delete", donor_item_path(donor_item), method: :delete, class: "alert button small round" %>
           </div>
         <% end %>
       <% else %>
