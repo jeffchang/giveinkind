@@ -12,5 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+//= require foundation
+//= require tinymce-jquery
+//= require jquery.ui.effect.all
+//= require introjs
 //= require_tree .

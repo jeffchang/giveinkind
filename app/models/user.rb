@@ -1,9 +1,5 @@
 class User < ActiveRecord::Base
 
-  has_one :collection_spot
-  has_many :locations
-  has_many :donor_items
-
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook, :twitter]
