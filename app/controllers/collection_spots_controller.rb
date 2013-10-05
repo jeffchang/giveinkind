@@ -54,7 +54,7 @@ class CollectionSpotsController < ApplicationController
 
   private
 
-  # def node_params
-  #   params.require(:node).permit(:title, :content, :parent_node)
-  # end
+  def collection_spot_params
+    params.require(:collection_spot).permit(:name, :address_1, :address_2, :city, :region_state, :postcode, :country, :directions)
+  end
 end

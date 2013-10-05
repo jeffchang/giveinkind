@@ -2,7 +2,7 @@
   <div class="small-12-columns">
     <h2>Create a New Need!</h2>
     <div class="new-form">
-      <%= render 'form' %>
+      <%= render partial: 'form', locals => {title: "", story: "", complete: "", thanks: ""} %>
     </div>
   </div>
 </div>

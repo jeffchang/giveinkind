@@ -55,6 +55,6 @@ class LocationsController < ApplicationController
   private
 
   def location_params
-    params.require(:node).permit(:name, :address_1, :address_2, :city, :region_state, :postcode, :country, :coords)
+    params.require(:location).permit(:name, :address_1, :address_2, :city, :region_state, :postcode, :country)
   end
 end

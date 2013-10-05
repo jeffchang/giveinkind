@@ -50,6 +50,23 @@ class NeededItemsController < ApplicationController
     end
   end
 
+  def search
+    # if params[:search_bar] != ""
+    #   find_by_title_author_content
+    #   if params[:tag_tokens] != ""
+    #     @found_stories = Story.all if @found_stories == []
+    #     find_stories_by_tag
+    #   end
+    # else
+    #   if params[:tag_tokens] != ""
+    #     @found_stories = Story.all
+    #     find_stories_by_tag
+    #   else
+    #     @found_stories = []
+    #   end
+    # end
+  end
+
   private
 
   def needed_item_params

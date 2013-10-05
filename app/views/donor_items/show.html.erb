@@ -1,0 +1,13 @@
+<div id="row">
+  <div class="small-12 columns">
+    <h2><%= @donor_item.name %></h2>
+    <p><i>by <%= @donor_item.user.name %></i></p>
+    <%= @donor_item.description %>
+    <br>
+
+    <p>Category: <%= @donor_item.subcategory.category + " - " @donor_item.subcategory %></p>
+    <% if @donor_item.need %>
+      <p>An answer to <%= link_to @donor_item.need.title, need_path(@donor_item.need) %></p>
+    <% end %>
+  </div>
+</div>

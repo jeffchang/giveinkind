@@ -7,6 +7,7 @@ Giveinkind::Application.routes.draw do
   resources :needed_items
   resources :donor_items
   resources :collection_spots
+  resources :locations
   resources :profiles, :only => [:show]
 
   post "needed_items/search" => "needed_items#search"
