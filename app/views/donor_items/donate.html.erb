@@ -1,0 +1,8 @@
+<div class="row">
+  <div class="small-12-columns">
+    <h2>Donate this item!</h2>
+    <div class="new-form">
+      <%= render partial: 'form', :locals => {name: @needed_item.name, description: @needed_item.description, details: nil, thanks: nil, status: nil, image_url: @needed_item.image_url, oversized: "unchecked", subcategory: @needed_item.subcategory, need_id: nil} %>
+    </div>
+  </div>
+</div>

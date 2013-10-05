@@ -52,6 +52,12 @@ class DonorItemsController < ApplicationController
     end
   end
 
+  def donate
+    @donor_item = DonorItem.new
+    categories_and_subcategories
+    @needed_item = NeededItem.find(params[:id])
+  end
+
   private
 
   def donor_item_params

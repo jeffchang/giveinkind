@@ -1,1 +1,5 @@
-<%= collection_select(nil, :subcategory_id, subcategories, :id, :name, {:prompt => "Select a Subcategory"}) %>
+<% unless @subcategory %>
+  <%= collection_select(nil, :subcategory_id, subcategories, :id, :name, {:prompt => "Select a Subcategory"}) %>
+<% else %>
+  <%= collection_select(nil, :subcategory_id, subcategories, :id, :name, {:selected => @subcategory}, {:prompt => "Select a Subcategory"}) %>
+<% end %>

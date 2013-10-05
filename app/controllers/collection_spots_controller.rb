@@ -27,9 +27,9 @@ class CollectionSpotsController < ApplicationController
     @collection_spot = CollectionSpot.find(params[:id])
     if current_user.facilitator
       update_collection_spot
-      redirect_to profile_edit_path(current_user), :notice => "#{@collection_spot.name} was updated successfully."
+      redirect_to edit_profile_path(current_user), :notice => "#{@collection_spot.name} was updated successfully."
     else
-      redirect_to profile_edit_path(current_user), :notice => "I'm sorry, only facilitators can change collection spots."
+      redirect_to edit_profile_path(current_user), :notice => "I'm sorry, only facilitators can change collection spots."
     end
   end
 
@@ -37,9 +37,9 @@ class CollectionSpotsController < ApplicationController
     @collection_spot = CollectionSpot.find(params[:id])
     if current_user.facilitator
       @collection_spot.destroy
-      redirect_to profile_edit_path(current_user), :notice => "#{@collection_spot.name} was updated successfully."
+      redirect_to edit_profile_path(current_user), :notice => "#{@collection_spot.name} was updated successfully."
     else
-      redirect_to profile_edit_path(current_user), :notice => "I'm sorry, only facilitators can remove collection spots."
+      redirect_to edit_profile_path(current_user), :notice => "I'm sorry, only facilitators can remove collection spots."
     end
   end
 

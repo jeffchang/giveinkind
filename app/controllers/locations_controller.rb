@@ -27,9 +27,9 @@ class LocationsController < ApplicationController
     @location = Location.find(params[:id])
     if current_user.locations.include? @location
       update_location
-      redirect_to profile_edit_path(current_user), :notice => "#{@location.name} was updated successfully."
+      redirect_to edit_profile_path(current_user), :notice => "#{@location.name} was updated successfully."
     else
-      redirect_to profile_edit_path(current_user), :notice => "This isn't one of your locations!"
+      redirect_to edit_profile_path(current_user), :notice => "This isn't one of your locations!"
     end
   end
 
@@ -37,9 +37,9 @@ class LocationsController < ApplicationController
     @location = Location.find(params[:id])
     if current_user.locations.include? @location
       @location.destroy
-      redirect_to profile_edit_path(current_user), :notice => "#{@location.name} was removed successfully."
+      redirect_to edit_profile_path(current_user), :notice => "#{@location.name} was removed successfully."
     else 
-      redirect_to profile_edit_path(current_user, :notice => "This isn't one of your locations!"
+      redirect_to edit_profile_path(current_user, :notice => "This isn't one of your locations!"
     end
   end
 
