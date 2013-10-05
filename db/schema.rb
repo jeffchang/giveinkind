@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 20131005132542) do
     t.integer  "oversized"
     t.integer  "subcategory_id"
     t.integer  "need_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

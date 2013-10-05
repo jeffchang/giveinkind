@@ -18,6 +18,7 @@ class NeedsController < ApplicationController
     @need.user = current_user
     @need.complete = 0
     @need.save
+    redirect_to profile_path(current_user), :notice => "Need created successfully!"
   end
 
   def edit

@@ -15,6 +15,7 @@ class DonorItemsController < ApplicationController
   def create
     @donor_item = DonorItem.create(donor_item_params)
     @donor_item.awaiting_pickup = 2
+    @donor_item.user = current_user
     @donor_item.save
     redirect_to new_donor_item_path, :notice => "#{@donor_item.name} was added successfully."
   end

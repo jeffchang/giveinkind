@@ -16,6 +16,7 @@ class NeededItemsController < ApplicationController
   def create
     @needed_item = NeededItem.create(needed_item_params)
     @needed_item.still_needed = 2
+    @needed_item.user = current_user
     @needed_item.save
     redirect_to new_needed_item_path, :notice => "#{@needed_item.name} was added successfully."
   end

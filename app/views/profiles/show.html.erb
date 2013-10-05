@@ -23,7 +23,7 @@
         <h3 class='profile-list-headers'>Existing Needs</h3>
         <% unless @user.needs.empty? %>
           <% @user.needs.each do |need| %>
-            <h5><%= link_to need_path(need) %></h5>
+            <h5><%= link_to need.title, need_path(need) %></h5>
             <div>
               <%= link_to "Edit", edit_need_path(need), class: "success button small round" %>
               <%= link_to "Delete", need_path(need), method: :delete, class: "alert button small round" %>
@@ -38,7 +38,7 @@
         <% @independent_items = @user.needed_items.select {|needed_item| needed_item.need == nil} %>
         <% unless @independent_items.empty? %>
           <% @independent_items.each do |needed_item| %>
-            <h5><%= link_to needed_item_path(needed_item) %></h5>
+            <h5><%= link_to needed_item.name, needed_item_path(needed_item) %></h5>
             <div>
               <%= link_to "Edit", edit_needed_item_path(needed_item), class: "success button small round" %>
               <%= link_to "Delete", needed_item_path(needed_item), method: :delete, class: "alert button small round" %>
@@ -50,18 +50,19 @@
       </div>
     </div>
   <% end %>
+  <br><br>
+
   <div class="row">
     <div class="row">
       <div class="small-12 columns">
-        <%= link_to "Create a new need", new_need_path, class: "success button large round" %>
-        <%= link_to "Create a new needed item", new_needed_item_path, class: "alert button large round" %>
+        <%= link_to "Create a new donation", new_donor_item_path, class: "success button large round" %>
       </div>
     </div>
     <div class="small-12 columns">
       <h3 class='profile-list-headers'>Your Donations</h3>
       <% unless @user.donor_items.empty? %>
         <% @user.donor_items.each do |donor_item| %>
-          <h5><%= link_to donor_item_path(donor_item) %></h5>
+          <h5><%= link_to donor_item.name, donor_item_path(donor_item) %></h5>
           <div>
             <%= link_to "Edit", edit_donor_item_path(donor_item), class: "success button small round" %>
             <%= link_to "Delete", needed_item_path(needed_item), method: :delete, class: "alert button small round" %>

@@ -3,7 +3,6 @@
   <%= n.text_area :description, value: description, class: "tinymce" %>
   <%= tinymce %>
   <%= n.check_box :oversized, value: oversized %>
-  <%= n.hidden_field :need_id, @need.id %>
   <p></p>
   <%= n.submit %>
 <% end %>
