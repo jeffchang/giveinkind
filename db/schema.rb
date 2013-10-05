@@ -117,6 +117,8 @@ ActiveRecord::Schema.define(version: 20131004232426) do
     t.datetime "updated_at"
     t.string   "preferred_email"
     t.string   "image_url"
+    t.boolean  "donor"
+    t.boolean  "facilitator"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
