@@ -8,7 +8,13 @@
 </head>
 <body>
 
-<%= yield %>
+  <%= render "/layouts/nav" %>
+  
+  <div <%= content_for :container_modifier %> class="container small-9 small-centered columns">
+    <%= display_flash_messages %>
+    <%= yield %>
+    <div class="reveal-modal" id="modalContainer" style="display:hidden;"></div>
+  </div>
 
 </body>
 </html>
