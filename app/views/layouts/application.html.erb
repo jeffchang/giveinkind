@@ -11,7 +11,9 @@
   <%= render "/layouts/header" %>
   
   <div <%= content_for :container_modifier %> class="container">
+    <div class="row">
     <%= display_flash_messages %>
+    </div>
     <%= yield %>
     <div class="reveal-modal" id="modalContainer" style="display:hidden;"></div>
   </div>

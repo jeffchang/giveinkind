@@ -1,10 +1,27 @@
-<div class="row">
-  <div class="small-12-columns">
-    <h2>Edit this Need</h2>
-    <div class="new-form">
-      <%= render partial: 'form', :locals => {title: @existing_title, story: @existing_story, complete: @existing_status, thanks: @existing_thanks} %>
+<div class="wrapper wrapper-darker">
+  <div class="row">
+    <div class="welcome-text">
+      <h1>Edit Item</h1>
+      <p>Turpis pellentesque? Integer dignissim nascetur, scelerisque dignissim pulvinar urna tincidunt etiam non pid urna urna rhoncus.</p>
     </div>
   </div>
 </div>
 
-<%= render 'create_item' %>
+
+<div class="row">
+
+	<div class="large-8 columns">
+    <h2>Edit this Need</h2>
+    <div class="new-form">
+      <%= render partial: 'form', :locals => {title: @existing_title, story: @existing_story, complete: @existing_status, thanks: @existing_thanks} %>
+    </div>
+    </div>
+
+</div>
+
+<div class="row">
+	<div class="large-8 columns">
+		<%= render 'create_item' %>
+	</div>
+
+</div>
