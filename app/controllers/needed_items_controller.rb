@@ -7,7 +7,12 @@ class NeededItemsController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def index
-    @needed_items = NeededItem.all
+    if (params.has_key?(:search_input))
+      @needed_items = NeededItem.fuzzy_search({name: params[:search],
+                                               description: params[:search]}, false)
+    else
+      @needed_items = NeededItem.all
+    end
     categories_and_subcategories
   end
 
@@ -74,6 +79,11 @@ class NeededItemsController < ApplicationController
     end
   end
 
+  # def search
+  #   @found_items = NeededItem.basic_search({name: params[:search_input],
+  #                                           description: params[:search_input]}, false)
+  # end
+
   def update_subcategories
     category = Category.find(params[:category_id])
     subcategories = category.subcategories
@@ -89,10 +99,6 @@ class NeededItemsController < ApplicationController
       urls.append(result[:url])
     end
     render :json => urls
-  end
-
-  def search
-    @found_items = NeededItem.fuzzy_search(name: params[:search_items], description: params[:search_items])
   end
 
   private

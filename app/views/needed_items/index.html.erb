@@ -1,5 +1,9 @@
 <div class="row">
-
+  <form class="search-form">
+    <input class="search-input" name="search" type="search" autofocus
+           value=<%= "#{params[:search]}" %> placeholder="What would you like to give?">
+  </form>
+  <br>
   <% if @needed_items.length > 0 %>
     <div id="infinite-scroll">
       <% @needed_items.each do |needed_item| %>

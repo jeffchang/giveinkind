@@ -3,7 +3,12 @@ class NeedsController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def index
-    @needs = Need.all
+    if (params.has_key?(:search_input))
+      @needs = Need.fuzzy_search({name: params[:search],
+                                  description: params[:search]}, false)
+    else
+      @needs = Need.all
+    end
   end
 
   def show
@@ -45,9 +50,10 @@ class NeedsController < ApplicationController
     redirect_to profile_path(current_user), :notice => "Need removed successfully."
   end
 
-  def search
-    @found_needs = Need.fuzzy_search({title: params[:search_items], story: params[:search_items]}, false)
-  end
+  # def search
+  #   @found_needs = Need.fuzzy_search({name: params[:search_input],
+  #                                     description: params[:search_input]}, false)
+  # end
 
   private
 
