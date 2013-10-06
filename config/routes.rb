@@ -1,14 +1,15 @@
 Giveinkind::Application.routes.draw do
   
   root "static_pages#index"
-  devise_for :users, :controllers => {:registrations => "registrations", :omniauth_callbacks => "users/omniauth_callbacks"}
+  devise_for :users, :controllers => {:registrations => "registrations",
+                                      :omniauth_callbacks => "users/omniauth_callbacks"}
 
+  post "needs/search" => "needs#search"
   post "needed_items/search" => "needed_items#search"
   post "needed_items/images" => "needed_items#images"
   post "needed_items/update_subcategories" => "needed_items#update_subcategories"
   post "donor_items/update_subcategories" => "donor_items#update_subcategories"
   get "donor_items/donate/:id" => "donor_items#donate"
-  post "needs/search" => "needs#search"
 
   resources :needs
   resources :needed_items

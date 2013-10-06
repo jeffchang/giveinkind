@@ -1,9 +1,10 @@
-<div id="row">
+<div class="row">
   <div class="small-12 columns">
     <h2><%= @need.title %></h2>
-    <% if need.user && need.user.name != "" %>
+    <% if @need.user && @need.user.name != "" %>
       <p><i>by <%= @need.user.name %></i></p>
     <% end %>
-    <%= @need.story %>
+    <%= @need.story.html_safe %>
+    <br>
   </div>
 </div>
