@@ -1,6 +1,6 @@
 Giveinkind::Application.routes.draw do
   
-  root "static_pages#welcome"
+  root "static_pages#index"
   devise_for :users, :controllers => {:registrations => "registrations", :omniauth_callbacks => "users/omniauth_callbacks"}
 
   post "needed_items/search" => "needed_items#search"
