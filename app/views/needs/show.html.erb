@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="small-12 columns">
+  <div class="small-9 columns">
     <%= image_tag @need.image_url %>
     <h2><%= @need.title %></h2>
     <% if @need.user && @need.user.name != "" %>
@@ -7,5 +7,28 @@
     <% end %>
     <%= @need.story.html_safe %>
     <br>
+
+  <% if @need.user == current_user %>
+    <%= link_to "Add a needed item!", "/needed_items/newinneed/#{@need.id}", class: "large success round button" %>
+  <% end %>
+
+  </div>
+
+  <div class="small-3 columns">
+      <h3 class='profile-list-headers'>Needed Items</h3>
+    <% unless @need.needed_items.empty? %>
+      <% @need.needed_items.each do |needed_item| %>
+        <h5><%= link_to needed_item.name, needed_item_path(needed_item) %></h5>
+        <p><i><%= needed_item.description.html_safe if needed_item.description.length < 50 %></i></p>
+        <% if @need.user == current_user %>
+          <div>
+            <%= link_to "Edit", edit_needed_item_path(needed_item), class: "success button small" %>
+            <%= link_to "Delete", needed_item_path(needed_item), method: :delete, class: "alert button small" %>
+          </div>
+        <% end %>
+      <% end %>
+    <% else %>
+      <h5>You haven't entered any independent needs!</h5>
+    <% end %>
   </div>
 </div>
