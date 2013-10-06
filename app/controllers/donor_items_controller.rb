@@ -67,14 +67,6 @@ class DonorItemsController < ApplicationController
     redirect_to profile_path(current_user), :notice => "Donation removed successfully."
   end
 
-  def update_subcategories
-    category = Category.find(params[:category_id])
-    subcategories = category.subcategories
-    render :update do |page|
-      page.replace_html 'subcategories', :partial => 'subcategories', :object => subcategories
-    end
-  end
-
   def donate
     @donor_item = DonorItem.new
     categories_and_subcategories

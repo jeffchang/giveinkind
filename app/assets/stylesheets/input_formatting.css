@@ -6,3 +6,12 @@ input {
     border: 2px solid #999;
     border-radius:2px;
 }
+
+#dialog-form {
+  display: none;
+}
+
+.no-close .ui-dialog-titlebar-close
+{
+    display: none;
+}

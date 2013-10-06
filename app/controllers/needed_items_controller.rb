@@ -74,14 +74,6 @@ class NeededItemsController < ApplicationController
     end
   end
 
-  def update_subcategories
-    category = Category.find(params[:category_id])
-    subcategories = category.subcategories
-    render :update do |page|
-      page.replace_html 'subcategories', :partial => 'subcategories', :object => subcategories
-    end
-  end
-
   def images
     result = GoogleAjax::Search.images(params[:term])[:results]
     urls = []
