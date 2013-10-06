@@ -1,4 +1,5 @@
 require 'googleajax'
+GoogleAjax.referer = "http://localhost:3000"
 GoogleAjax.api_key = "AIzaSyARQ7tB58L6RZ5bEZWju0Gu71eY4t4vj6o"
 
 class NeededItemsController < ApplicationController

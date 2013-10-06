@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20131005132542) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
+    t.string   "icon"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -46,7 +47,7 @@ ActiveRecord::Schema.define(version: 20131005132542) do
     t.text     "thanks"
     t.integer  "subcategory_id"
     t.integer  "user_id"
-    t.integer  "need_id"
+    t.integer  "needed_item_id"
     t.integer  "location_id"
     t.integer  "collection_spot_id"
     t.datetime "created_at"

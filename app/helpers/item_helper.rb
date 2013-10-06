@@ -8,7 +8,7 @@ module ItemHelper
     @existing_oversized = @donor_item.oversized
     @existing_details = @donor_item.pickup_details
     @existing_subcategory = @donor_item.subcategory_id
-    @existing_need_id = @donor_item.need_id
+    @existing_needed_item_id = @donor_item.needed_item_id
     @existing_thanks = @donor_item.thanks
   end
 

@@ -8,8 +8,10 @@
     <% if @donor_item.subcategory %>
       <p>Category: <%= @donor_item.subcategory.category + " - " + @donor_item.subcategory %></p>
     <% end %>
-    <% if @donor_item.need %>
-      <p>An answer to <%= link_to @donor_item.need.title, need_path(@donor_item.need) %></p>
+    <% if @donor_item.needed_item && @donor_item.needed_item.need %>
+      <p>An answer to <%= link_to @donor_item.needed_item.need.title, need_path(@donor_item.needed_item.need) %></p>
+    <% elsif @donor_item.needed_item %>
+      <p>Thanks so much for answering <%= link_to "this need!", needed_item_path(@donor_item.needed_item) %></p>
     <% end %>
   </div>
 </div>

@@ -1,10 +1,21 @@
 <div class="row">
 
   <% if @donor_items.length > 0 %>
-    <div class="small-4 columns">
+    <div class="small-6 columns">
       <% @donor_items.each do |donor_item| %>
-        <h4><%= link_to donor_item.name, donor_item_path(donor_item) %></h4>
-        <p><i>Written by <%= donor_item.user.name %></i></p>
+        <div class="item-container">
+          <div class="small-2 columns">
+            <% if donor_item.image_url %>
+              <%= image_tag donor_item.image_url, class: "mini-images" %>
+            <% elsif donor_item.subcategory %>
+              <%= image_tag donor_item.subcategory.category.icon, class: "mini-images" %>
+            <% end %>
+          </div>
+          <div class="small-4 columns">
+            <h4><%= link_to donor_item.name, donor_item_path(donor_item) %></h4>
+            <p><i>Written by <%= donor_item.user.name %></i></p>
+          </div>
+        </div>
       <% end %>
     </div>
 

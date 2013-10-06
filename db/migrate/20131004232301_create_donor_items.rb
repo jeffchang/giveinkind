@@ -10,7 +10,7 @@ class CreateDonorItems < ActiveRecord::Migration
       t.text :thanks
       t.references :subcategory
       t.references :user
-      t.references :need
+      t.references :needed_item
       t.references :location
       t.references :collection_spot
 

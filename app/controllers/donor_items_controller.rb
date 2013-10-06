@@ -17,6 +17,11 @@ class DonorItemsController < ApplicationController
   def create
     @donor_item = DonorItem.create(donor_item_params)
     @donor_item.awaiting_pickup = 2
+
+    @needed_item = NeededItem.find(params[:id])
+    @needed_item.still_needed = 1
+    @needed_item.save
+    
     @donor_item.user = current_user
     @donor_item.save
     redirect_to new_donor_item_path, :notice => "#{@donor_item.name} was added successfully."
@@ -61,6 +66,6 @@ class DonorItemsController < ApplicationController
   private
 
   def donor_item_params
-    params.require(:donor_item).permit(:name, :description, :oversized, :pickup_details, :subcategory_id, :need_id)
+    params.require(:donor_item).permit(:name, :description, :oversized, :pickup_details, :subcategory_id, :needed_item_id)
   end
 end
