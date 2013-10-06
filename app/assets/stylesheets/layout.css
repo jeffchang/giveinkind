@@ -99,8 +99,20 @@ textarea {
 	margin: 0 20px 20px 0;
 }
 
+.footer {
+	margin-top: 3em;
+}
+
 .footer-links {
-	margin-top: 1.5em;
+	margin-top: 2.5em;
+	padding-top: 1.5em;
+	border-top: 1px dotted rgb(150,150,150);
+}
+
+.footer-links li {
+	list-style: none;
+	display: inline-block;
+	margin-right: 20px;
 }
 
 .latest-news img {
@@ -118,19 +130,48 @@ textarea {
 
 .logo a {
 	display: block;
+	width: 257px;
+	height: 163px;
 }
 
-/*.primary-nav {
-	position: absolute;
-	bottom: 0;
-	right: 0;
+.partners img {
+	height: 100px;
 }
 
+.primary-nav {
+    float: right;
+    list-style: none;
+    margin: 10px 0 0 0;
+/*    width:100%;*/
+    position: relative;
+    z-index: 5;
+}
 .primary-nav li {
-	display: inline-block;
-	margin-left: 1em;
-	font-size: 1em;
-}*/
+    list-style: none;
+    float: left;
+    margin-left: 20px;
+    position: relative;
+}
+.primary-nav a {
+    display: block;
+}
+
+.primary-nav ul {
+    margin: 0;
+    float: none;
+    position:absolute;
+    left:-9999px; 
+}
+.primary-nav ul li{
+    float: none;
+    margin: 0;
+}
+.primary-nav ul a{
+    white-space: nowrap; 
+}
+.primary-nav li:hover ul{ 
+    left: 0; 
+}
 
 .sidebar-feature {
 	padding-left: 60px;
@@ -142,6 +183,22 @@ textarea {
 
 .sidebar-feature ul li {
 	list-style: none;
+}
+
+.social {
+	position: relative;
+}
+
+.social-twitter {
+	position: absolute;
+	top: 9px;
+	right: 5px;
+}
+
+.social-facebook {
+	position: absolute;
+	top: 10px;
+	right: 65px;
 }
 
 .text-columns {
@@ -174,11 +231,19 @@ textarea {
 
 .wrapper-intro {
 	padding: 0;
-	height: 300px;
 }
 
 .wrapper-intro-home h1 {
 	margin-top: 2em;
+}
+
+.wrapper-intro-home div {
+	padding: 0;
+	height: 300px;
+  	width: 1000px;
+  	height: 300px;
+  	background: url(/assets/home_welcome.svg) no-repeat;
+  	background-size: 1000px 300px;	
 }
 
 .wrapper-darker {

@@ -1,5 +1,15 @@
+<div class="wrapper wrapper-darker">
+  <div class="row">
+    <div class="welcome-text">
+      <h1>Edit Item</h1>
+      <p>Turpis pellentesque? Integer dignissim nascetur, scelerisque dignissim pulvinar urna tincidunt etiam non pid urna urna rhoncus.</p>
+    </div>
+  </div>
+</div>
+
+
 <div class="row">
-  <div class="small-12-columns">
+  <div class="large-8 columns">
     <h2>Edit this Needed Item!</h2>
     <div class="new-form">
       <%= render partial: 'form', :locals => {name: @existing_name, description: @existing_description, status: @existing_status, image_url: @existing_image, oversized: @existing_oversized, subcategory: @existing_subcategory, need_id: @existing_need_id} %>

@@ -1,9 +1,19 @@
+<div class="wrapper wrapper-darker">
+  <div class="row">
+    <div class="welcome-text">
+      <h1>Current Needs</h1>
+      <p>Turpis pellentesque? Integer dignissim nascetur, scelerisque dignissim pulvinar urna tincidunt etiam non pid urna urna rhoncus.</p>
+    </div>
+  </div>
+</div>
+
+
 <div class="row">
 
   <% if @needs.length > 0 %>
     <div id="infinite-scroll">
       <% @needs.each do |need| %>
-        <div class="infinite small-4 columns">
+        <div class="infinite large-3 columns">
           <div class="item-container">
             <%= link_to image_tag(need.image_url, class: "story-image"), need_path(need) %>
             <h4><%= link_to need.title, need_path(need), class: "item-link" %></h4>
