@@ -1,31 +1,18 @@
 <div class="row">
-  <% needs_count = @needs.length %>
-  <% needs_per_row = needs_count / 3 %>
 
   <% if @needs.length > 0 %>
     <div class="small-4 columns">
-      <% @needs[0...needs_per_row].each do |need| %>
-        <h4><%= link_to need.title, need_path(need) %></h4>
-        <p><i>Written by <%= need.user.name %></i></p>
+      <% @needs.each do |need| %>
+        <div class="item-container">
+          <%= link_to image_tag(need.image_url, class: "story-image"), need_path(need) %>
+          <h4><%= link_to need.name, need_path(need), class: "item-link" %></h4>
+          <p><i>Written by <%= need.user.name %></i></p>
+        </div>
       <% end %>
     </div>
 
-    <div class="small-4 columns">
-    <% @needs[needs_per_row...needs_per_row*2].each do |need| %>
-        <h4><%= link_to need.title, need_path(need) %></h4>
-        <p><i>Started by <%= need.user.name %></i></p>
-    <% end %>
-    </div>
-
-    <div class="small-4 columns">
-    <% @needs[needs_per_row*2...needs_per_row*3].each do |need| %>
-        <h4><%= link_to need.title, need_path(need) %></h4>
-        <p><i>Started by <%= need.user.name %></i></p>
-    <% end %>
-    </div>
-
   <% else %>
-    <h4>There are no needs to show.</h4>
+    <h4>There are no current needs to show.</h4>
   <% end %>
-
+  
 </div>

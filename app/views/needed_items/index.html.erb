@@ -6,13 +6,13 @@
         <div class="item-container">
           <div class="small-2 columns">
             <% if needed_item.image_url %>
-              <%= image_tag needed_item.image_url, class: "mini-images" %>
+              <%= image_tag needed_item.image_url, class: "mini-image" %>
             <% elsif needed_item.subcategory %>
-              <%= image_tag needed_item.subcategory.category.icon, class: "mini-images" %>
+              <%= image_tag needed_item.subcategory.category.icon, class: "mini-image" %>
             <% end %>
           </div>
           <div class="small-4 columns">
-            <h4><%= link_to needed_item.name, needed_item_path(needed_item) %></h4>
+            <h4><%= link_to needed_item.name, needed_item_path(needed_item), class: "item-link" %></h4>
             <p><i>Written by <%= needed_item.user.name %></i></p>
           </div>
         </div>
