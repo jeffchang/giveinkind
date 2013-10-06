@@ -16,6 +16,7 @@ class NeededItemsController < ApplicationController
   end
 
   def new
+    @need_id = params[:need_id]
     @needed_item = NeededItem.new
     categories_and_subcategories
   end
@@ -33,7 +34,11 @@ class NeededItemsController < ApplicationController
     @needed_item.still_needed = 2
     @needed_item.user = current_user
     @needed_item.save
-    redirect_to new_needed_item_path, :notice => "#{@needed_item.name} was added successfully."
+    if @needed_item.need
+      redirect_to need_path(@needed_item.need), :notice => "#{@needed_item.name} was created successfully."
+    else
+      redirect_to new_needed_item_path, :notice => "#{@needed_item.name} was added successfully."
+    end
   end
 
   def edit
@@ -54,7 +59,7 @@ class NeededItemsController < ApplicationController
       end
       @needed_item.save
       if @needed_item.need
-        redirect_to edit_need_path(@needed_item.need), :notice => "#{@needed_item.name} was updated successfully."
+        redirect_to need_path(@needed_item.need), :notice => "#{@needed_item.name} was updated successfully."
       else
         redirect_to needed_item_path(@needed_item), :notice => "#{@needed_item.name} was updated successfully."
       end

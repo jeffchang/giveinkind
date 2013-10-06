@@ -9,7 +9,6 @@ Giveinkind::Application.routes.draw do
   post "needed_items/images" => "needed_items#images"
   post "needed_items/update_subcategories" => "needed_items#update_subcategories"
   post "donor_items/update_subcategories" => "donor_items#update_subcategories"
-  post "needs/update_subcategories" => "needs#update_subcategories"
   get "donor_items/donate/:id" => "donor_items#donate"
   get 'donor_items/logistics/:id' => "donor_items#logistics"
 
@@ -19,6 +18,7 @@ Giveinkind::Application.routes.draw do
   resources :collection_spots
   resources :profiles, :only => [:show]
 
+  get "needed_items/newinneed/:need_id" => "needed_items#new"
   get "static_pages/about_us" => "static_pages#about_us"
   get "static_pages/blog" => "static_pages#blog"
   get "static_pages/faqs" => "static_pages#faqs"
