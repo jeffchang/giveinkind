@@ -18,13 +18,15 @@
                 <p><i>Donated by <%= donor_item.user.name %></i></p>
               <% end %>
               <% if current_user.facilitator %>
-                <h5>Current Status: </h5><%= ["Pending, Confirmed, Completed"][donor_item.awaiting_pickup] %>
+                <h5>Current Status: <%= ["Pending", "Confirmed", "Completed"][donor_item.awaiting_pickup] %></h5>
                 <% if donor_item.awaiting_pickup == 2 %>
-                  <%= link_to "Schedule Pickup", "/donor_items/logistics/#{donor_item.id}" %>
+                  <%= link_to "Schedule Pickup", "/donor_items/logistics/#{donor_item.id}", class: "button alert small" %>
                 <% elsif donor_item.awaiting_pickup == 1 %>
-                  <%= link_to "Check Logistics", "/donor_items/logistics/#{donor_item.id}" %>
+                  <%= link_to "Check Logistics", "/donor_items/logistics/#{donor_item.id}", class: "button alert small" %>
                 <% elsif donor_item.awaiting_pickup == 0 && donor_item.thanks.blank? %>
-                  <%= link_to "Thank the Donor", "/donor_items/logistics/#{donor_item.id}" %>
+                  <%= link_to "Thank the Donor", "/donor_items/logistics/#{donor_item.id}", class: "button alert small" %>
+                <% else %>
+                  <h5>All tasks complete!</5>
                 <% end %>
               <% end %>
             </div>
