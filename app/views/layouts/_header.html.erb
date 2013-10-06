@@ -6,16 +6,23 @@
         <ul class="primary-nav">
             <% if !current_user || !current_user.facilitator %>
                 <li><%= link_to "About Us", "/static_pages/about_us" %></li>
-                <li><%= link_to "Browse", needs_path %></li>
+                <li>
+                    <a href="#">Browse</a>
+                    <ul>
+                        <li><%= link_to "Current Needs", needs_path %></li>
+                        <li><%= link_to "Donations", donor_items_path %></li>
+                    </ul>
+                </li>
                 <li><%= link_to "Needed Items", needed_items_path %></li>
                 <li><%= link_to "Donate", new_donor_item_path %></li>
                 <li><%= link_to "Blog", "/static_pages/blog" %></li>
                 <li><%= link_to "FAQs", "/static_pages/faqs" %></li>
+                <li><%= link_to "Donations", donor_items_path %></li>
                 <li><%= link_to "Contact", "/static_pages/contact" %></li>
             <% else %>
-                <li><%= link_to "Donations", donor_items_path %></li>
                 <li><%= link_to "Donors to Thank", donor_items_path %></li>
-                <li><%= link_to "Browse", needs_path %></li>
+                <li><%= link_to "Donations", donor_items_path %></li>
+                <li><%= link_to "Browse Needs", needs_path %></li>
                 <li><%= link_to "Needed Items", needed_items_path %></li>
                 <li><%= link_to "Donate", new_donor_item_path %></li>
                 <li><%= link_to "Contact", "/static_pages/contact" %></li>

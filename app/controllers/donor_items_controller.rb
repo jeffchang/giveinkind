@@ -1,8 +1,8 @@
 class DonorItemsController < ApplicationController
 
   def index
-    @donor_items = DonorItem.all
-    categories_and_subcategories
+      @donor_items = DonorItem.all
+      categories_and_subcategories
   end
 
   def show
@@ -79,6 +79,10 @@ class DonorItemsController < ApplicationController
     @donor_item = DonorItem.new
     categories_and_subcategories
     @needed_item = NeededItem.find(params[:id])
+  end
+
+  def logistics
+    @donor_item = DonorItem.find(params[:id])
   end
 
   private

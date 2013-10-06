@@ -15,7 +15,17 @@
             <div class="small-4 columns">
               <h4><%= link_to donor_item.name, donor_item_path(donor_item), class: "item-link" %></h4>
               <% if donor_item.user && donor_item.user.name != "" %>
-                <p><i>Written by <%= donor_item.user.name %></i></p>
+                <p><i>Donated by <%= donor_item.user.name %></i></p>
+              <% end %>
+              <% if current_user.facilitator %>
+                <h5>Current Status: </h5><%= ["Pending, Confirmed, Completed"][donor_item.awaiting_pickup] %>
+                <% if donor_item.awaiting_pickup == 2 %>
+                  <%= link_to "Schedule Pickup", "/donor_items/logistics/#{donor_item.id}" %>
+                <% elsif donor_item.awaiting_pickup == 1 %>
+                  <%= link_to "Check Logistics", "/donor_items/logistics/#{donor_item.id}" %>
+                <% elsif donor_item.awaiting_pickup == 0 && donor_item.thanks.blank? %>
+                  <%= link_to "Thank the Donor", "/donor_items/logistics/#{donor_item.id}" %>
+                <% end %>
               <% end %>
             </div>
           </div>
