@@ -5,11 +5,36 @@
         <h1 class="logo"><a href="">Give In Kind</a></h1>
         <ul class="primary-nav">
             <li><%= link_to "About Us", "/static_pages/about_us" %></li>
-            <li><a href="#">Browse</a></li>
-            <li><a href="#">Donate</a></li>
+            <li><%= link_to "Browse", needs_path %></li>
+            <li><%= link_to "Current Needs", needed_items_path %></li>
+            <li><%= link_to "Donate", new_donor_item_path %></li>
             <li><%= link_to "Blog", "/static_pages/blog" %></li>
             <li><%= link_to "FAQs", "/static_pages/faqs" %></li>
             <li><%= link_to "Contact", "/static_pages/contact" %></li>
+            <% if current_user %>
+                <li><%= link_to "My Profile", profile_path(current_user) %></li>
+                <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+            <% else %>
+                <li>
+                    <a href="#">Sign In</a>
+                    <ul>
+                        <li><%= link_to "Sign in with Twitter", user_omniauth_authorize_path('twitter') %></li>
+                        <li><%= link_to "Sign in with Facebook",user_omniauth_authorize_path('facebook') %></li>
+                        <li><%= link_to "Sign in with LinkedIn",user_omniauth_authorize_path('linkedin') %></li>
+                        <li><%= link_to "Sign in with Email", new_user_session_path, {:data => { :'reveal-id' => 'modalContainer', :'reveal-ajax' => "true"} } %></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Sign Up</a>
+                    <ul>
+                        <li><%= link_to "Sign up with Twitter", user_omniauth_authorize_path('twitter') %></li>
+                        <li><%= link_to "Sign up with Facebook",user_omniauth_authorize_path('facebook') %></li>
+                        <li><%= link_to "Sign up with LinkedIn",user_omniauth_authorize_path('linkedin') %></li>
+                        <li><%= link_to "Sign up with Email", new_user_registration_path, {:data => { :'reveal-id' => 'modalContainer', :'reveal-ajax' => "true"} } %></li>
+                    </ul>
+              </li>
+            <% end %>
+
         </ul>
     </header>
 </div>

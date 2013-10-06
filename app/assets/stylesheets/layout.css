@@ -120,7 +120,7 @@ textarea {
 	display: block;
 }
 
-.primary-nav {
+/*.primary-nav {
 	position: absolute;
 	bottom: 0;
 	right: 0;
@@ -130,7 +130,7 @@ textarea {
 	display: inline-block;
 	margin-left: 1em;
 	font-size: 1em;
-}
+}*/
 
 .sidebar-feature {
 	padding-left: 60px;
