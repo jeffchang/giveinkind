@@ -1,19 +1,13 @@
 var plate_url, url;
 
 $(document).ready(function(){
-  EmbedNeededItem();
+  new EmbedNeededItem("#build_need");
 });
 
-function EmbedNeededItem() {
-  $('.create_plate').on("click", function(e) {
+function EmbedNeededItem(container) {
+  $("#create_button").on("click", function(e) {
     e.preventDefault();
-    url = $(this).attr("href");
-    plate_url = $(this).find("img").attr("src");
     $("#dialog-form").dialog("open");
-    $("#selected_plate").attr("src", plate_url);
-    $('#tag_tokens').tokenInput('/tags.json', {
-      theme: 'facebook'
-    });
   });
 
   $( "#dialog-form" ).dialog({
@@ -23,7 +17,7 @@ function EmbedNeededItem() {
     width: 800,
     modal: true,
     buttons: {
-      "Create My Plate!": function() {
+      "Submit needed item": function() {
         var plate_description = $("#plate_description").val(),
         plate_location = $("#plate_location").val(),
         plate_price,
@@ -73,3 +67,5 @@ function EmbedNeededItem() {
     }
   });
 };
+
+#display-items

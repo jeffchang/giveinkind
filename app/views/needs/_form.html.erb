@@ -1,7 +1,11 @@
-<%= form_for @need do |n| %>
-  <%= n.text_field :title, value: title %>
-  <%= n.text_area :story, class: "tinymce", value: story %>
-  <%= tinymce %>
-  <p></p>
-  <%= n.submit %>
-<% end %>
+<div id="build-need">
+  <%= form_for @need do |n| %>
+    <%= n.text_field :title, value: title %>
+    <%= n.text_area :story, class: "tinymce", value: story %>
+    <%= tinymce %>
+    <p></p>
+    <%= n.submit %>
+  <% end %>
+  <div id="create-button" class="button success round large"></div>
+  <div id="display-items"></div>
+</div>
