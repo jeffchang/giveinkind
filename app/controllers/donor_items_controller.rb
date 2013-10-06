@@ -18,9 +18,18 @@ class DonorItemsController < ApplicationController
     @donor_item = DonorItem.create(donor_item_params)
     @donor_item.awaiting_pickup = 2
 
-    @needed_item = NeededItem.find(params[:id])
-    @needed_item.still_needed = 1
-    @needed_item.save
+    @donor_item.subcategory = Subcategory.find(params[:subcategory_id])
+    if params[:image_url] && params[:image_url] != ""
+      @donor_item.image_url = params[:image_url]
+    else
+      @donor_item.image_url = GoogleAjax::Search.images(donor_item_params[:name])[:results][0][:url]
+    end
+
+    if @donor_item.needed_item_id
+      @needed_item = NeededItem.find(params[:id])
+      @needed_item.still_needed = 1
+      @needed_item.save
+    end
     
     @donor_item.user = current_user
     @donor_item.save

@@ -21,6 +21,12 @@ class NeededItemsController < ApplicationController
 
   def create
     @needed_item = NeededItem.create(needed_item_params)
+    @needed_item.subcategory = Subcategory.find(params[:subcategory_id])
+    if params[:image_url] && params[:image_url] != ""
+      @needed_item.image_url = params[:image_url]
+    else
+      @needed_item.image_url = GoogleAjax::Search.images(needed_item_params[:name])[:results][0][:url]
+    end
     @needed_item.still_needed = 2
     @needed_item.user = current_user
     @needed_item.save
@@ -37,6 +43,11 @@ class NeededItemsController < ApplicationController
     @needed_item = NeededItem.find(params[:id])
     if @needed_item.user == current_user
       update_needed_item
+      @needed_item.subcategory = Subcategory.find(params[:subcategory_id])
+      if params[:image_url] && params[:image_url] != ""
+        @needed_item.image_url = params[:image_url]
+      end
+      @needed_item.save
       if @needed_item.need
         redirect_to edit_need_path(@needed_item.need), :notice => "#{@needed_item.name} was updated successfully."
       else

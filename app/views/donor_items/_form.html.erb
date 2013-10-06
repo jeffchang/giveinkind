@@ -12,6 +12,10 @@
   <%= d.text_area :description, class: "tinymce" %>
   <%= tinymce %>
   <%= d.check_box :oversized %>
+  <%= d.label "oversized", "This is an oversized item" %>
+  <% if needed_item_id %>
+    <%= d.hidden_field :needed_item_id, :value => needed_item_id %>
+  <% end %>
   <div id="search-images">
     <% if image_url %>
       <%= image_tag image_url, id: "current-image" %>
@@ -19,5 +23,5 @@
   </div>
   <div class="row"></div>
   <p></p>
-  <%= d.submit, class: "submit-item" %>
+  <%= d.submit "Submit", class: "submit-item button round success" %>
 <% end %>

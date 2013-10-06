@@ -1,6 +1,5 @@
 $(document).ready(function() {
   new Searchable('#search-image');
-  new Submittable('#search-image');
 });
 
 function Searchable(container) {
@@ -10,16 +9,9 @@ function Searchable(container) {
       data, function(response) {
         var images = "<h3>Select an image!</h3>";
         for (var i = 0; i < response.length; i++) {
-          images += "<input type='radio' name='image' id='"+i+"' class='input-hidden' /><label for='"+i+"'><img src='"+response[i]+"' class='sample-images'></label>"
+          images += "<input type='radio' name='image_url' id='"+i+"' class='input-hidden' value='"+response[i]+"' /><label for='"+i+"'><img src='"+response[i]+"' class='sample-images'></label>"
         }
         jQuery("#search-images").html(images);
     });
   });
-}
-
-function Submittable(container) {
-  $(".submit-item").submit(function(e) {
-    e.preventDefault();
-    
-  })
 }
