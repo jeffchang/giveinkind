@@ -1,8 +1,13 @@
 class DonorItemsController < ApplicationController
 
   def index
+    if (params.has_key?(:search_input))
+      @donor_items = DonorItem.fuzzy_search({name: params[:search],
+                                             description: params[:search]}, false)
+    else
       @donor_items = DonorItem.all
-      categories_and_subcategories
+    end
+    categories_and_subcategories
   end
 
   def show
@@ -65,6 +70,19 @@ class DonorItemsController < ApplicationController
     @donor_item = DonorItem.find(params[:id])
     @donor_item.destroy
     redirect_to profile_path(current_user), :notice => "Donation removed successfully."
+  end
+
+  # def search
+  #   @found_items = DonorItem.fuzzy_search({title: params[:search_input],
+  #                                          story: params[:search_input]}, false)
+  # end
+
+  def update_subcategories
+    category = Category.find(params[:category_id])
+    subcategories = category.subcategories
+    render :update do |page|
+      page.replace_html 'subcategories', :partial => 'subcategories', :object => subcategories
+    end
   end
 
   def donate
