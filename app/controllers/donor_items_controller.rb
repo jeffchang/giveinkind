@@ -18,11 +18,13 @@ class DonorItemsController < ApplicationController
     @donor_item = DonorItem.create(donor_item_params)
     @donor_item.awaiting_pickup = 2
 
-    @donor_item.subcategory = Subcategory.find(params[:subcategory_id])
+    if params[:subcategory_id] and params["subcategory_id"] != ""
+      @donor_item.subcategory = Subcategory.find(params[:subcategory_id])
+    end
     if params[:image_url] && params[:image_url] != ""
       @donor_item.image_url = params[:image_url]
     else
-      @donor_item.image_url = GoogleAjax::Search.images(donor_item_params[:name])[:results][0][:url]
+      @donor_item.image_url = GoogleAjax::Search.images(donor_item_params[:name])[:results][0][:url] rescue Photo.all.sample.image_url
     end
 
     if @donor_item.needed_item_id
@@ -46,6 +48,13 @@ class DonorItemsController < ApplicationController
     @donor_item = DonorItem.find(params[:id])
     if @donor_item.user == current_user
       update_donor_item
+      if params[:subcategory_id] and params["subcategory_id"] != ""
+        @donor_item.subcategory = Subcategory.find(params[:subcategory_id])
+      end
+      if params[:image_url] && params[:image_url] != ""
+        @donor_item.image_url = params[:image_url]
+      end
+      @donor_item.save
       redirect_to donor_item_path(@donor_item), :notice => "#{@donor_item.name} was updated successfully."
     else
       redirect_to profile_path(current_user), :notice => "This isn't one of your donations!"

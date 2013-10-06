@@ -28,8 +28,10 @@
   opacity: 0.6;
   filter: alpha(opacity=50);
   -webkit-transition: opacity 0.7s linear;
-  min-height: 300px;
-  max-height: 300px;
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 20%;
+  max-height: 20%;
 }
   
 .story-image:hover {

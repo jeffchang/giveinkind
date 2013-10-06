@@ -22,11 +22,13 @@ class NeededItemsController < ApplicationController
 
   def create
     @needed_item = NeededItem.create(needed_item_params)
-    @needed_item.subcategory = Subcategory.find(params[:subcategory_id])
+    if params[:subcategory_id] and params["subcategory_id"] != ""
+      @needed_item.subcategory = Subcategory.find(params[:subcategory_id])
+    end
     if params[:image_url] && params[:image_url] != ""
       @needed_item.image_url = params[:image_url]
     else
-      @needed_item.image_url = GoogleAjax::Search.images(needed_item_params[:name])[:results][0][:url]
+      @needed_item.image_url = GoogleAjax::Search.images(needed_item_params[:name])[:results][0][:url] rescue Photo.all.sample.image_url
     end
     @needed_item.still_needed = 2
     @needed_item.user = current_user
@@ -44,7 +46,9 @@ class NeededItemsController < ApplicationController
     @needed_item = NeededItem.find(params[:id])
     if @needed_item.user == current_user
       update_needed_item
-      @needed_item.subcategory = Subcategory.find(params[:subcategory_id])
+      if params[:subcategory_id] and params["subcategory_id"] != ""
+        @needed_item.subcategory = Subcategory.find(params[:subcategory_id])
+      end
       if params[:image_url] && params[:image_url] != ""
         @needed_item.image_url = params[:image_url]
       end
@@ -88,21 +92,7 @@ class NeededItemsController < ApplicationController
   end
 
   def search
-    @found_items = NeededItem.fuzzy_search({name: params[:search_items], description: params[:search_items]}, false)
-    # if params[:search_bar] != ""
-    #   find_by_title_author_content
-    #   if params[:tag_tokens] != ""
-    #     @found_stories = Story.all if @found_stories == []
-    #     find_stories_by_tag
-    #   end
-    # else
-    #   if params[:tag_tokens] != ""
-    #     @found_stories = Story.all
-    #     find_stories_by_tag
-    #   else
-    #     @found_stories = []
-    #   end
-    # end
+    @found_items = NeededItem.fuzzy_search(name: params[:search_items], description: params[:search_items])
   end
 
   private

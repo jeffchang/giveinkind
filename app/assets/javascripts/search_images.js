@@ -1,5 +1,6 @@
 $(document).ready(function() {
   new Searchable('#search-image');
+  new Blockable('#infinite-scroll');
 });
 
 function Searchable(container) {
@@ -13,5 +14,15 @@ function Searchable(container) {
         }
         jQuery("#search-images").html(images);
     });
+  });
+}
+
+function Blockable(container) {
+  jQuery('.story-image').each(function() {
+    if ($(this).height() > $(this).width()) {
+        $(this).css('min-width', $(this).height());
+    } else {
+        $(this).css('min-height', $(this).width());
+    }
   });
 }

@@ -14,7 +14,9 @@
             </div>
             <div class="small-4 columns">
               <h4><%= link_to donor_item.name, donor_item_path(donor_item), class: "item-link" %></h4>
-              <p><i>Written by <%= donor_item.user.name %></i></p>
+              <% if donor_item.user && donor_item.user.name != "" %>
+                <p><i>Written by <%= donor_item.user.name %></i></p>
+              <% end %>
             </div>
           </div>
         </div>

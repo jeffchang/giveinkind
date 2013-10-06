@@ -4,17 +4,19 @@
     <div id="infinite-scroll">
       <% @needed_items.each do |needed_item| %>
         <div class="infinite small-6 columns">
-          <div class="item-container">
-            <div class="small-2 columns">
+          <div class="item-container row">
+            <div class="small-4 columns">
               <% if needed_item.image_url %>
                 <%= image_tag needed_item.image_url, class: "mini-image" %>
               <% elsif needed_item.subcategory %>
                 <%= image_tag needed_item.subcategory.category.icon, class: "mini-image" %>
               <% end %>
             </div>
-            <div class="small-4 columns">
+            <div class="small-4 columns left">
               <h4><%= link_to needed_item.name, needed_item_path(needed_item), class: "item-link" %></h4>
-              <p><i>Written by <%= needed_item.user.name %></i></p>
+              <% if needed_item.user && needed_item.user.name != "" %>
+                <p><i>Written by <%= needed_item.user.name %></i></p>
+              <% end %>
             </div>
           </div>
         </div>

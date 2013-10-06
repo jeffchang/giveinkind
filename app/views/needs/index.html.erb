@@ -7,7 +7,9 @@
           <div class="item-container">
             <%= link_to image_tag(need.image_url, class: "story-image"), need_path(need) %>
             <h4><%= link_to need.title, need_path(need), class: "item-link" %></h4>
-            <p><i>Written by <%= need.user.name %></i></p>
+            <% if need.user && need.user.name != "" %>
+              <p><i>Written by <%= need.user.name %></i></p>
+            <% end %>
           </div>
         </div>
       <% end %>
