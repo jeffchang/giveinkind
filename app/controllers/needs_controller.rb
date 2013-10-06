@@ -1,5 +1,6 @@
 class NeedsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
+  skip_before_filter :verify_authenticity_token
 
   def index
     @needs = Need.all
@@ -42,6 +43,10 @@ class NeedsController < ApplicationController
     @need = Need.find(params[:id])
     @need.destroy
     redirect_to profile_path(current_user), :notice => "Need removed successfully."
+  end
+
+  def search
+    @found_needs = Need.fuzzy_search({title: params[:search_items], story: params[:search_items]}, false)
   end
 
   private
