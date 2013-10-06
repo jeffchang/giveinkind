@@ -4,6 +4,7 @@ GoogleAjax.api_key = "AIzaSyARQ7tB58L6RZ5bEZWju0Gu71eY4t4vj6o"
 
 class NeededItemsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
+  skip_before_filter :verify_authenticity_token
 
   def index
     @needed_items = NeededItem.all
@@ -87,6 +88,7 @@ class NeededItemsController < ApplicationController
   end
 
   def search
+    @found_items = NeededItem.fuzzy_search({name: params[:search_items], description: params[:search_items]}, false)
     # if params[:search_bar] != ""
     #   find_by_title_author_content
     #   if params[:tag_tokens] != ""

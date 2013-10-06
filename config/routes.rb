@@ -8,6 +8,7 @@ Giveinkind::Application.routes.draw do
   post "needed_items/update_subcategories" => "needed_items#update_subcategories"
   post "donor_items/update_subcategories" => "donor_items#update_subcategories"
   get "donor_items/donate/:id" => "donor_items#donate"
+  post "needs/search" => "needs#search"
 
   resources :needs
   resources :needed_items

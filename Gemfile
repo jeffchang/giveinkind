@@ -49,6 +49,7 @@ group :doc do
 end
 
 #Feature
+gem 'textacular', '~> 3.0'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-twitter'
