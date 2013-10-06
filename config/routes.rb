@@ -10,6 +10,15 @@ Giveinkind::Application.routes.draw do
   resources :profiles, :only => [:show]
 
   post "needed_items/search" => "needed_items#search"
+  get "static_pages/about_us" => "static_pages#about_us"
+  get "static_pages/blog" => "static_pages#blog"
+  get "static_pages/faqs" => "static_pages#faqs"
+  get "static_pages/contact" => "static_pages#contact"
+  get "static_pages/index" => "static_pages#index"
+  get "static_pages/offered" => "static_pages#offered"
+  get "static_pages/browse" => "static_pages#browse"
+  get "static_pages/donate" => "static_pages#donate"
+  get "static_pages/category" => "static_pages#category"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

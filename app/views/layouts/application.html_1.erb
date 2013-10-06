@@ -10,13 +10,11 @@
 
   <%= render "/layouts/header" %>
   
-  <div <%= content_for :container_modifier %> class="container">
+  <div <%= content_for :container_modifier %> class="container large-12 large-centered columns">
     <%= display_flash_messages %>
     <%= yield %>
     <div class="reveal-modal" id="modalContainer" style="display:hidden;"></div>
   </div>
-
-  <%= render "/layouts/footer" %>
 
 </body>
 </html>
