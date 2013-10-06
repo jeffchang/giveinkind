@@ -1,3 +1,6 @@
+require 'googleajax'
+GoogleAjax.api_key = "AIzaSyARQ7tB58L6RZ5bEZWju0Gu71eY4t4vj6o"
+
 class NeededItemsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
 
@@ -60,6 +63,15 @@ class NeededItemsController < ApplicationController
     render :update do |page|
       page.replace_html 'subcategories', :partial => 'subcategories', :object => subcategories
     end
+  end
+
+  def images
+    result = GoogleAjax::Search.images(params[:term])[:results]
+    urls = []
+    result.each do |result|
+      urls.append(result[:url])
+    end
+    render :json => urls
   end
 
   def search
