@@ -31,6 +31,5 @@ class StaticPagesController < ApplicationController
 
   def category
   end
-
   
 end

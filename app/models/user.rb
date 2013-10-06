@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
 
   has_many :needs
   has_many :needed_items, through: :needs
-  has_one :collection_spot
+  belongs_to :collection_spot
   has_many :donor_items
   has_and_belongs_to_many :locations
 

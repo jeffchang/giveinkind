@@ -24,7 +24,7 @@
 
     <br><br>
     <h3>Here's your current preferred collection spot:</h3>
-    <% unless @user.collection_spot.empty? %>
+    <% if @user.collection_spot %>
       <% collection_spot = @user.collection_spot %>
       <h4><%= collection_spot.name %></h4>
       <%= collection_spot.address_1 %>
@@ -34,7 +34,6 @@
       <%= collection_spot.postcode %>
       <%= collection_spot.country %>
       <br><br>
-      <% end %>
     <% else %>
       <h4>No preferred collection spot found!</h4>
     <% end %>

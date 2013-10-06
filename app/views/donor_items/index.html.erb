@@ -4,18 +4,30 @@
     <div id="infinite-scroll">
       <% @donor_items.each do |donor_item| %>
         <div class="infinite small-6 columns">
-          <div class="item-container">
-            <div class="small-2 columns">
+          <div class="item-container row">
+            <div class="small-4 columns">
               <% if donor_item.image_url %>
                 <%= image_tag donor_item.image_url, class: "mini-image" %>
               <% elsif donor_item.subcategory %>
                 <%= image_tag donor_item.subcategory.category.icon, class: "mini-image" %>
               <% end %>
             </div>
-            <div class="small-4 columns">
+            <div class="small-4 columns left">
               <h4><%= link_to donor_item.name, donor_item_path(donor_item), class: "item-link" %></h4>
               <% if donor_item.user && donor_item.user.name != "" %>
-                <p><i>Written by <%= donor_item.user.name %></i></p>
+                <p><i>Donated by <%= donor_item.user.name %></i></p>
+              <% end %>
+              <% if current_user.facilitator %>
+                <h5>Current Status: <%= ["Pending", "Confirmed", "Completed"][donor_item.awaiting_pickup] %></h5>
+                <% if donor_item.awaiting_pickup == 2 %>
+                  <%= link_to "Schedule Pickup", "/donor_items/logistics/#{donor_item.id}", class: "button alert small" %>
+                <% elsif donor_item.awaiting_pickup == 1 %>
+                  <%= link_to "Check Logistics", "/donor_items/logistics/#{donor_item.id}", class: "button alert small" %>
+                <% elsif donor_item.awaiting_pickup == 0 && donor_item.thanks.blank? %>
+                  <%= link_to "Thank the Donor", "/donor_items/logistics/#{donor_item.id}", class: "button alert small" %>
+                <% else %>
+                  <h5>All tasks complete!</5>
+                <% end %>
               <% end %>
             </div>
           </div>

@@ -1,14 +1,19 @@
-<div id="row">
+<div class="row">
   <div class="small-12 columns">
+    <% if @needed_item.image_url %>
+      <%= image_tag @needed_item.image_url %>
+    <% elsif @needed_item.subcategory %>
+      <%= image_tag @needed_item.subcategory.category.icon %>
+    <% end %>
     <h2><%= @needed_item.name %></h2>
-    <% if needed_item.user && needed_item.user.name != "" %>
+    <% if @needed_item.user && @needed_item.user.name != "" %>
       <p><i>by <%= @needed_item.user.name %></i></p>
     <% end %>
     <%= @needed_item.description.html_safe %>
     <br>
 
     <% if @needed_item.subcategory %>
-      <p>Category: <%= @needed_item.subcategory.category + " - " + @needed_item.subcategory %></p>
+      <p>Category: <%= @needed_item.subcategory.category.name + " - " + @needed_item.subcategory.name %></p>
     <% end %>
     <% if @needed_item.need %>
       <p>Part of <%= link_to @needed_item.need.title, need_path(@needed_item.need) %></p>
