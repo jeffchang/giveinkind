@@ -1,5 +1,7 @@
 class DonorItemsController < ApplicationController
 
+  skip_before_action :authenticate_user!, only: [:index]
+
   def index
     if (params.has_key?(:search_input))
       @donor_items = DonorItem.fuzzy_search({name: params[:search],

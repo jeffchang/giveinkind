@@ -43,7 +43,7 @@
             <h3 class='profile-list-headers'>Existing Needs</h3>
             <% unless @user.needs.empty? %>
               <% @user.needs.each do |need| %>
-                <h5><%= link_to need.title, need_path(need) %></h5>
+                <h5><%= link_to need.title, need_path(need), class: "item-link" %></h5>
                 <div>
                   <%= link_to "Edit", edit_need_path(need), class: "success button small" %>
                   <%= link_to "Delete", need_path(need), method: :delete, class: "alert button small" %>
@@ -62,7 +62,7 @@
         <% @independent_items = NeededItem.where(:user => current_user, :need_id => nil) %>
         <% unless @independent_items.empty? %>
           <% @independent_items.each do |needed_item| %>
-            <h5><%= link_to needed_item.name, needed_item_path(needed_item) %></h5>
+            <h5><%= link_to needed_item.name, needed_item_path(needed_item), class: "item-link" %></h5>
             <div>
               <%= link_to "Edit", edit_needed_item_path(needed_item), class: "success button small" %>
               <%= link_to "Delete", needed_item_path(needed_item), method: :delete, class: "alert button small" %>
@@ -86,7 +86,7 @@
       <h3 class='profile-list-headers'>Your Donations</h3>
       <% unless @user.donor_items.empty? %>
         <% @user.donor_items.each do |donor_item| %>
-          <h5><%= link_to donor_item.name, donor_item_path(donor_item) %></h5>
+          <h5><%= link_to donor_item.name, donor_item_path(donor_item), class: "item-link" %></h5>
           <div>
             <%= link_to "Edit", edit_donor_item_path(donor_item), class: "success button small" %>
             <%= link_to "Delete", donor_item_path(donor_item), method: :delete, class: "alert button small" %>

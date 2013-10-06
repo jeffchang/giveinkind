@@ -1,7 +1,7 @@
 <div class="row">
   <form class="search-form">
     <input class="search-input" name="search" type="search" autofocus
-           value=<%= "#{params[:search]}" %> placeholder="What item are you looking for?">
+           value='<%= "#{params[:search]}" %>' placeholder="What item are you looking for?">
   </form>
   <br>
   <% if @donor_items.length > 0 %>
@@ -21,7 +21,7 @@
               <% if donor_item.user && donor_item.user.name != "" %>
                 <p><i>Donated by <%= donor_item.user.name %></i></p>
               <% end %>
-              <% if current_user.facilitator %>
+              <% if current_user && current_user.facilitator %>
                 <h5>Current Status: <%= ["Completed", "Confirmed", "Pending"][donor_item.awaiting_pickup] %></h5>
                 <% if donor_item.awaiting_pickup == 2 %>
                   <%= link_to "Schedule Pickup", "/donor_items/logistics/#{donor_item.id}", class: "button alert small" %>
