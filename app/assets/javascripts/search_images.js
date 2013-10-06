@@ -1,5 +1,6 @@
 $(document).ready(function() {
   new Searchable('#search-image');
+  new Submittable('#search-image');
 });
 
 function Searchable(container) {
@@ -14,4 +15,11 @@ function Searchable(container) {
         jQuery("#search-images").html(images);
     });
   });
+}
+
+function Submittable(container) {
+  $(".submit-item").submit(function(e) {
+    e.preventDefault();
+    
+  })
 }

@@ -16,7 +16,8 @@ class NeedsController < ApplicationController
   def create
     @need = Need.create(need_params)
     @need.user = current_user
-    # @need.image_url = sample(default collection of photos) unless @need.image_url -- or put all such lines in before_create, model
+    @need.image_url = Photo.all.sample.image_url unless @need.image_url
+    # or put all such lines in before_create, model
     @need.complete = 0
     @need.save
     redirect_to profile_path(current_user), :notice => "Need created successfully!"

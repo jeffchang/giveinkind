@@ -1,23 +1,29 @@
 <div class="row">
 
   <% if @needed_items.length > 0 %>
-    <div class="small-6 columns">
+    <div id="infinite-scroll">
       <% @needed_items.each do |needed_item| %>
-        <div class="item-container">
-          <div class="small-2 columns">
-            <% if needed_item.image_url %>
-              <%= image_tag needed_item.image_url, class: "mini-image" %>
-            <% elsif needed_item.subcategory %>
-              <%= image_tag needed_item.subcategory.category.icon, class: "mini-image" %>
-            <% end %>
-          </div>
-          <div class="small-4 columns">
-            <h4><%= link_to needed_item.name, needed_item_path(needed_item), class: "item-link" %></h4>
-            <p><i>Written by <%= needed_item.user.name %></i></p>
+        <div class="infinite small-6 columns">
+          <div class="item-container">
+            <div class="small-2 columns">
+              <% if needed_item.image_url %>
+                <%= image_tag needed_item.image_url, class: "mini-image" %>
+              <% elsif needed_item.subcategory %>
+                <%= image_tag needed_item.subcategory.category.icon, class: "mini-image" %>
+              <% end %>
+            </div>
+            <div class="small-4 columns">
+              <h4><%= link_to needed_item.name, needed_item_path(needed_item), class: "item-link" %></h4>
+              <p><i>Written by <%= needed_item.user.name %></i></p>
+            </div>
           </div>
         </div>
       <% end %>
     </div>
+
+    <nav id="page_nav">
+      <a href="page2.html"></a>
+    </nav>
 
   <% else %>
     <h4>There are no needed items to show.</h4>

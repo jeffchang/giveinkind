@@ -5,6 +5,17 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+require 'flickraw'
+FlickRaw.api_key = ENV["FLICKR_API_KEY"]
+FlickRaw.shared_secret = ENV["FLICKR_SHARED_SECRET"]
+
+results = flickr.photos.search(:tags => "poverty", :sort => "interestingness-desc").map {|result| result.id}
+urls = results[0..249].map {|result| FlickRaw.url_b(flickr.photos.getInfo(:photo_id => result))}
+
+urls.each do |url|
+  Photo.create(image_url: url)
+end
+
 
 category_01 = Category.create(name: "White Goods")
 subcategories = *(01..10)

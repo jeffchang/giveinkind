@@ -10,12 +10,11 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require prototype
-//= require prototype_ujs
 //= require jquery
 //= require jquery_ujs
 //= require foundation
 //= require tinymce-jquery
 //= require jquery.ui.effect.all
 //= require introjs
+//= require_tree ../../../vendor/assets/javascripts/.
 //= require_tree .
