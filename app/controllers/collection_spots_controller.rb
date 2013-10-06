@@ -10,63 +10,42 @@ class CollectionSpotsController < ApplicationController
   end
 
   def new
-    # @parent_node = params[:id] if params[:id]
-    # @story = Story.new
-    # @story.build_node
+    @collection_spot = CollectionSpot.new
   end
 
   def create
-    # story_params = {}
-    # process_upload
-    # story_params[:title] = node_params[:title]
-    # @story = Story.new(story_params)
-    # @story.user = current_user
-    # create_nodes
-    # @story.tag_list = params[:story][:tag_list]
-    # if @story.save
-    #   redirect_to story_path(@story), :notice => "#{@story.title} was created successfully."
-    # else
-    #   render :new, :alert => "Story could not be saved. Please see the errors below."
-    # end
+    @collection_spot = CollectionSpot.create(collection_spot_params)
+    redirect_to collection_spots_path, :notice => "#{@collection_spot.name} was added successfully."
   end
 
   def edit
-    # @story = Node.find(params[:id]).stories.first
-    # populate_edit_fields
+    @collection_spot = CollectionSpot.find(params[:id])
+    populate_collection_spot_edit_fields
   end
 
   def update
-    # @story_params = {}
-    # @story = Story.find(params[:id])
-    # if @story.user == current_user
-    #   process_upload
-    #   if params[:story] && params[:story][:upload]
-    #     edit_page_upload
-    #     flash.now[:success] = "File uploaded! Please edit for formatting as you see fit."
-    #     render :edit
-    #   else
-    #     update_story
-    #     update_node
-    #     if @story.update_attributes(@story_params)
-    #       redirect_to story_path(@story.node), :notice => "#{@story.title} was updated successfully."
-    #     else
-    #       render :edit, :alert => "Updates could not be saved. Please see the errors below."
-    #     end
-    #   end
-    # else
-    #   redirect_to profile_path(current_user), :notice => "You don't own this part of the story!"
-    # end
+    @collection_spot = CollectionSpot.find(params[:id])
+    if current_user.facilitator
+      update_collection_spot
+      redirect_to edit_profile_path(current_user), :notice => "#{@collection_spot.name} was updated successfully."
+    else
+      redirect_to edit_profile_path(current_user), :notice => "I'm sorry, only facilitators can change collection spots."
+    end
   end
 
   def destroy
-    # story = Story.find(params[:id])
-    # story.destroy
-    # redirect_to stories_path, :notice => "Story removed successfully."
+    @collection_spot = CollectionSpot.find(params[:id])
+    if current_user.facilitator
+      @collection_spot.destroy
+      redirect_to edit_profile_path(current_user), :notice => "#{@collection_spot.name} was updated successfully."
+    else
+      redirect_to edit_profile_path(current_user), :notice => "I'm sorry, only facilitators can remove collection spots."
+    end
   end
 
   private
 
-  # def node_params
-  #   params.require(:node).permit(:title, :content, :parent_node)
-  # end
+  def collection_spot_params
+    params.require(:collection_spot).permit(:name, :address_1, :address_2, :city, :region_state, :postcode, :country, :directions)
+  end
 end

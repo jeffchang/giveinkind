@@ -1,0 +1,11 @@
+.search-form {
+    font-size: 30px;
+}
+
+.search-label {
+}
+
+.search-input {
+    border: 3px solid #800000; /* maroon */
+    border-radius: 10px;
+}

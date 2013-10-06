@@ -1,0 +1,25 @@
+.input-hidden {
+  position: absolute;
+  left: -9999px;
+}
+
+input[type=radio]:checked + label>img {
+  border: 1px solid #fff;
+  box-shadow: 0 0 3px 3px #090;
+}
+
+input[type=radio] + label>img {
+  display: inline-block;
+  float: left;
+  margin: 0 10px;
+  border: 1px dashed #444;
+  width: 22%;
+  height: 22%;
+  transition: 500ms all;
+}
+
+input[type=radio]:checked + label>img {
+  -webkit-transform:rotate(10deg);
+  -moz-transform:rotate(10deg);
+  -o-transform:rotate(10deg); 
+}

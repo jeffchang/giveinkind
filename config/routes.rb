@@ -3,10 +3,18 @@ Giveinkind::Application.routes.draw do
   root "static_pages#welcome"
   devise_for :users, :controllers => {:registrations => "registrations", :omniauth_callbacks => "users/omniauth_callbacks"}
 
+  post "needed_items/search" => "needed_items#search"
+  post "needed_items/images" => "needed_items#images"
+  post "needed_items/update_subcategories" => "needed_items#update_subcategories"
+  post "donor_items/update_subcategories" => "donor_items#update_subcategories"
+  get "donor_items/donate/:id" => "donor_items#donate"
+  post "needs/search" => "needs#search"
+
   resources :needs
   resources :needed_items
   resources :donor_items
   resources :collection_spots
+<<<<<<< HEAD
   resources :profiles, :only => [:show]
 
   post "needed_items/search" => "needed_items#search"
@@ -19,6 +27,10 @@ Giveinkind::Application.routes.draw do
   get "static_pages/browse" => "static_pages#browse"
   get "static_pages/donate" => "static_pages#donate"
   get "static_pages/category" => "static_pages#category"
+=======
+  resources :locations
+  resources :profiles, :only => [:show, :edit]
+>>>>>>> 493bfea17ee7783cb111473cd108c27e91729e7e
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

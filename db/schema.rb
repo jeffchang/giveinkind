@@ -11,13 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131004232426) do
+ActiveRecord::Schema.define(version: 20131006033358) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_trgm"
 
   create_table "categories", force: true do |t|
     t.string   "name"
+    t.string   "icon"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -31,8 +33,7 @@ ActiveRecord::Schema.define(version: 20131004232426) do
     t.string   "postcode"
     t.string   "country"
     t.string   "coords"
-    t.integer  "donor_item_id"
-    t.integer  "donor_id"
+    t.string   "directions"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -46,8 +47,10 @@ ActiveRecord::Schema.define(version: 20131004232426) do
     t.datetime "pickup_details"
     t.text     "thanks"
     t.integer  "subcategory_id"
-    t.integer  "donor_id"
-    t.integer  "need_id"
+    t.integer  "user_id"
+    t.integer  "needed_item_id"
+    t.integer  "location_id"
+    t.integer  "collection_spot_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -61,10 +64,13 @@ ActiveRecord::Schema.define(version: 20131004232426) do
     t.string   "postcode"
     t.string   "country"
     t.string   "coords"
-    t.integer  "donor_item_id"
-    t.integer  "donor_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "locations_users", force: true do |t|
+    t.integer "location_id"
+    t.integer "user_id"
   end
 
   create_table "needed_items", force: true do |t|
@@ -75,6 +81,7 @@ ActiveRecord::Schema.define(version: 20131004232426) do
     t.integer  "oversized"
     t.integer  "subcategory_id"
     t.integer  "need_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -82,11 +89,16 @@ ActiveRecord::Schema.define(version: 20131004232426) do
   create_table "needs", force: true do |t|
     t.string   "title"
     t.text     "story"
+    t.string   "image_url"
     t.integer  "complete"
     t.text     "thanks"
-    t.integer  "facilitator_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "photos", force: true do |t|
+    t.string "image_url"
   end
 
   create_table "subcategories", force: true do |t|
@@ -117,8 +129,8 @@ ActiveRecord::Schema.define(version: 20131004232426) do
     t.datetime "updated_at"
     t.string   "preferred_email"
     t.string   "image_url"
-    t.boolean  "donor"
     t.boolean  "facilitator"
+    t.integer  "collection_spot_id"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

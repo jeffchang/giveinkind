@@ -1,0 +1,34 @@
+<div class="row">
+
+  <% if @donor_items.length > 0 %>
+    <div id="infinite-scroll">
+      <% @donor_items.each do |donor_item| %>
+        <div class="infinite small-6 columns">
+          <div class="item-container">
+            <div class="small-2 columns">
+              <% if donor_item.image_url %>
+                <%= image_tag donor_item.image_url, class: "mini-image" %>
+              <% elsif donor_item.subcategory %>
+                <%= image_tag donor_item.subcategory.category.icon, class: "mini-image" %>
+              <% end %>
+            </div>
+            <div class="small-4 columns">
+              <h4><%= link_to donor_item.name, donor_item_path(donor_item), class: "item-link" %></h4>
+              <% if donor_item.user && donor_item.user.name != "" %>
+                <p><i>Written by <%= donor_item.user.name %></i></p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <nav id="page_nav">
+      <a href="page2.html"></a>
+    </nav>
+
+  <% else %>
+    <h4>There are no donations to show.</h4>
+  <% end %>
+
+</div>

@@ -1,72 +1,57 @@
 class NeedsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
+  skip_before_filter :verify_authenticity_token
 
   def index
     @needs = Need.all
   end
 
   def show
-   @need = Need.find(params[:id])
+    @need = Need.find(params[:id])
   end
 
   def new
-    # @parent_node = params[:id] if params[:id]
-    # @story = Story.new
-    # @story.build_node
+    @need = Need.new
   end
 
   def create
-    # story_params = {}
-    # process_upload
-    # story_params[:title] = node_params[:title]
-    # @story = Story.new(story_params)
-    # @story.user = current_user
-    # create_nodes
-    # @story.tag_list = params[:story][:tag_list]
-    # if @story.save
-    #   redirect_to story_path(@story), :notice => "#{@story.title} was created successfully."
-    # else
-    #   render :new, :alert => "Story could not be saved. Please see the errors below."
-    # end
+    @need = Need.create(need_params)
+    @need.user = current_user
+    @need.image_url = Photo.all.sample.image_url unless @need.image_url
+    # or put all such lines in before_create, model
+    @need.complete = 0
+    @need.save
+    redirect_to profile_path(current_user), :notice => "Need created successfully!"
   end
 
   def edit
-    # @story = Node.find(params[:id]).stories.first
-    # populate_edit_fields
+    @need = Need.find(params[:id])
+    populate_need_edit_fields
   end
 
   def update
-    # @story_params = {}
-    # @story = Story.find(params[:id])
-    # if @story.user == current_user
-    #   process_upload
-    #   if params[:story] && params[:story][:upload]
-    #     edit_page_upload
-    #     flash.now[:success] = "File uploaded! Please edit for formatting as you see fit."
-    #     render :edit
-    #   else
-    #     update_story
-    #     update_node
-    #     if @story.update_attributes(@story_params)
-    #       redirect_to story_path(@story.node), :notice => "#{@story.title} was updated successfully."
-    #     else
-    #       render :edit, :alert => "Updates could not be saved. Please see the errors below."
-    #     end
-    #   end
-    # else
-    #   redirect_to profile_path(current_user), :notice => "You don't own this part of the story!"
-    # end
+    @need = Need.find(params[:id])
+    if @need.user == current_user
+      update_need
+      redirect_to need_path(@need), :notice => "#{@need.title} was updated successfully."
+    else
+      redirect_to profile_path(current_user), :notice => "This need doesn't belong to you!"
+    end
   end
 
   def destroy
-    # story = Story.find(params[:id])
-    # story.destroy
-    # redirect_to stories_path, :notice => "Story removed successfully."
+    @need = Need.find(params[:id])
+    @need.destroy
+    redirect_to profile_path(current_user), :notice => "Need removed successfully."
+  end
+
+  def search
+    @found_needs = Need.fuzzy_search({title: params[:search_items], story: params[:search_items]}, false)
   end
 
   private
 
-  # def node_params
-  #   params.require(:node).permit(:title, :content, :parent_node)
-  # end
+  def need_params
+    params.require(:need).permit(:title, :story)
+  end
 end

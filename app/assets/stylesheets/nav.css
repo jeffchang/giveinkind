@@ -7,7 +7,7 @@ body {
     min-height: 160px;
 }
 .navigation-area {
-    background-image: url('../images/navigation-container.jpg');
+    background-image: url('/assets/navigation-container.jpg');
     background-repeat: repeat-x;
 }
 .content-area {

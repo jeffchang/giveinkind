@@ -1,0 +1,77 @@
+<div class="show-user text-center" id="show-user">
+  <div class="row" style="margin-top: 20px">
+    <div class="small-3 columns">
+      <% if @user.image_url %>
+        <%= image_tag @user.image_url, size: '100%', class: "th radius" %>
+      <% else %>
+        <%= gravatar_image_tag(@user.email, alt: "/placeholder.jpg", size: '100%', class: "th radius") %>
+      <% end %>
+      <h3><%= @user.name %></h3>
+      <%= link_to "My Preferences", edit_profile_path(current_user) %>
+    </div>
+    <div class="small-9 columns"></div>
+  </div>
+
+  <% if @user.facilitator %>
+    <div class="row">
+      <div class="small-12 columns">
+        <%= link_to "Create a new need", new_need_path, class: "success button large round" %>
+        <%= link_to "Create a new needed item", new_needed_item_path, class: "alert button large round" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="small-6 columns">
+        <h3 class='profile-list-headers'>Existing Needs</h3>
+        <% unless @user.needs.empty? %>
+          <% @user.needs.each do |need| %>
+            <h5><%= link_to need.title, need_path(need) %></h5>
+            <div>
+              <%= link_to "Edit", edit_need_path(need), class: "success button small round" %>
+              <%= link_to "Delete", need_path(need), method: :delete, class: "alert button small round" %>
+            </div>
+          <% end %>
+        <% else %>
+          <h5>You haven't entered any needs!</h5>
+        <% end %>
+      </div>
+      <div class="small-6 columns">
+        <h3 class='profile-list-headers'>Additional Needed Items</h3>
+        <% @independent_items = NeededItem.where(:user => current_user, :need_id => nil) %>
+        <% unless @independent_items.empty? %>
+          <% @independent_items.each do |needed_item| %>
+            <h5><%= link_to needed_item.name, needed_item_path(needed_item) %></h5>
+            <div>
+              <%= link_to "Edit", edit_needed_item_path(needed_item), class: "success button small round" %>
+              <%= link_to "Delete", needed_item_path(needed_item), method: :delete, class: "alert button small round" %>
+            </div>
+          <% end %>
+        <% else %>
+          <h5>You haven't entered any independent needs!</h5>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <br><br>
+
+  <div class="row">
+    <div class="row">
+      <div class="small-12 columns">
+        <%= link_to "Create a new donation", new_donor_item_path, class: "success button large round" %>
+      </div>
+    </div>
+    <div class="small-12 columns">
+      <h3 class='profile-list-headers'>Your Donations</h3>
+      <% unless @user.donor_items.empty? %>
+        <% @user.donor_items.each do |donor_item| %>
+          <h5><%= link_to donor_item.name, donor_item_path(donor_item) %></h5>
+          <div>
+            <%= link_to "Edit", edit_donor_item_path(donor_item), class: "success button small round" %>
+            <%= link_to "Delete", donor_item_path(donor_item), method: :delete, class: "alert button small round" %>
+          </div>
+        <% end %>
+      <% else %>
+        <h5>You haven't added any donations yet!</h5>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -8,6 +8,7 @@ class CreateNeededItems < ActiveRecord::Migration
       t.integer :oversized
       t.references :subcategory
       t.references :need
+      t.references :user
 
       t.timestamps
     end

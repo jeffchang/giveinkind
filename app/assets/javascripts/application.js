@@ -16,4 +16,5 @@
 //= require tinymce-jquery
 //= require jquery.ui.effect.all
 //= require introjs
+//= require_tree ../../../vendor/assets/javascripts/.
 //= require_tree .

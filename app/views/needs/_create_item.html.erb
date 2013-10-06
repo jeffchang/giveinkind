@@ -1,0 +1,11 @@
+<div id="dialog-form" title="Add an item!">
+  <% @needed_item = NeededItem.new %>
+  <%= form_for @needed_item do |n| %>
+    <%= n.text_field :name %>
+    <%= n.text_area :description, class: "tinymce" %>
+    <%= tinymce %>
+    <%= n.check_box :oversized %>
+    <p></p>
+    <%= n.submit %>
+  <% end %>
+</div>

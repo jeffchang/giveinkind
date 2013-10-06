@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="small-12-columns">
+    <% if @found_items.empty? %>
+      <h2>No needed items found!</h2>
+    <% else %>
+      <h2>Needed Items:</h2>
+      <% @found_items.each do |needed_item| %>
+        <h3><%= link_to needed_item.name, needed_item_path(needed_item) %></h3>
+        <p><i><%= "Facilitated by #{needed_item.user.name}" %></i></p>
+      <% end %>
+    <% end %>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 class RegistrationsController < Devise::RegistrationsController
 
   def create
-    build_resource(sign_up_params)
+    build_resource(sign_up_params.merge(:facilitator => true))
 
     if resource.save
       if resource.active_for_authentication?

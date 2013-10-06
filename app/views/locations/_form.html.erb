@@ -1,0 +1,11 @@
+<%= form_for @location do |l| %>
+  <%= l.text_field :name, value: name %>
+  <%= l.text_field :address_1, value: address_1 %>
+  <%= l.text_field :address_2, value: address_2 %>
+  <%= l.text_field :city, value: city %>
+  <%= l.text_field :region_state, value: region_state %>
+  <%= l.text_field :postcode, value: postcode %>
+  <%= l.text_field :country, value: country %>
+  <p></p>
+  <%= l.submit %>
+<% end %>

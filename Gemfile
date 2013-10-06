@@ -49,6 +49,7 @@ group :doc do
 end
 
 #Feature
+gem 'textacular', '~> 3.0'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-twitter'
@@ -57,5 +58,7 @@ gem 'omniauth-linkedin'
 gem 'tinymce-rails'
 gem 'sanitize'
 gem 'gravatar_image_tag'
-
+gem 'prototype-rails'
 gem 'introjs-rails'
+gem 'googleajax'
+gem 'flickraw'

@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="small-12-columns">
+    <% if @found_needs.empty? %>
+      <h2>No needs found!</h2>
+    <% else %>
+      <h2>Needs:</h2>
+      <% @found_needs.each do |need| %>
+	    <h3><%= link_to @need.title, need_path(@need.need_id) %></h3>
+    	<i>by <%= @need.user.name %></i> <br>
+    	<%= @need.story %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

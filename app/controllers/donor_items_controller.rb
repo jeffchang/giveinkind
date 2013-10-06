@@ -2,70 +2,88 @@ class DonorItemsController < ApplicationController
 
   def index
     @donor_items = DonorItem.all
+    categories_and_subcategories
   end
 
   def show
-   @donor_item = DonorItem.find(params[:id])
+    @donor_item = DonorItem.find(params[:id])
   end
 
   def new
-    # @parent_node = params[:id] if params[:id]
-    # @story = Story.new
-    # @story.build_node
+    @donor_item = DonorItem.new
+    categories_and_subcategories
   end
 
   def create
-    # story_params = {}
-    # process_upload
-    # story_params[:title] = node_params[:title]
-    # @story = Story.new(story_params)
-    # @story.user = current_user
-    # create_nodes
-    # @story.tag_list = params[:story][:tag_list]
-    # if @story.save
-    #   redirect_to story_path(@story), :notice => "#{@story.title} was created successfully."
-    # else
-    #   render :new, :alert => "Story could not be saved. Please see the errors below."
-    # end
+    @donor_item = DonorItem.create(donor_item_params)
+    @donor_item.awaiting_pickup = 2
+
+    if params[:subcategory_id] and params["subcategory_id"] != ""
+      @donor_item.subcategory = Subcategory.find(params[:subcategory_id])
+    end
+    if params[:image_url] && params[:image_url] != ""
+      @donor_item.image_url = params[:image_url]
+    else
+      @donor_item.image_url = GoogleAjax::Search.images(donor_item_params[:name])[:results][0][:url] rescue Photo.all.sample.image_url
+    end
+
+    if @donor_item.needed_item_id
+      @needed_item = NeededItem.find(params[:id])
+      @needed_item.still_needed = 1
+      @needed_item.save
+    end
+    
+    @donor_item.user = current_user
+    @donor_item.save
+    redirect_to new_donor_item_path, :notice => "#{@donor_item.name} was added successfully."
   end
 
   def edit
-    # @story = Node.find(params[:id]).stories.first
-    # populate_edit_fields
+    @donor_item = DonorItem.find(params[:id])
+    populate_donor_item_edit_fields
+    categories_and_subcategories
   end
 
   def update
-    # @story_params = {}
-    # @story = Story.find(params[:id])
-    # if @story.user == current_user
-    #   process_upload
-    #   if params[:story] && params[:story][:upload]
-    #     edit_page_upload
-    #     flash.now[:success] = "File uploaded! Please edit for formatting as you see fit."
-    #     render :edit
-    #   else
-    #     update_story
-    #     update_node
-    #     if @story.update_attributes(@story_params)
-    #       redirect_to story_path(@story.node), :notice => "#{@story.title} was updated successfully."
-    #     else
-    #       render :edit, :alert => "Updates could not be saved. Please see the errors below."
-    #     end
-    #   end
-    # else
-    #   redirect_to profile_path(current_user), :notice => "You don't own this part of the story!"
-    # end
+    @donor_item = DonorItem.find(params[:id])
+    if @donor_item.user == current_user
+      update_donor_item
+      if params[:subcategory_id] and params["subcategory_id"] != ""
+        @donor_item.subcategory = Subcategory.find(params[:subcategory_id])
+      end
+      if params[:image_url] && params[:image_url] != ""
+        @donor_item.image_url = params[:image_url]
+      end
+      @donor_item.save
+      redirect_to donor_item_path(@donor_item), :notice => "#{@donor_item.name} was updated successfully."
+    else
+      redirect_to profile_path(current_user), :notice => "This isn't one of your donations!"
+    end
   end
 
   def destroy
-    # story = Story.find(params[:id])
-    # story.destroy
-    # redirect_to stories_path, :notice => "Story removed successfully."
+    @donor_item = DonorItem.find(params[:id])
+    @donor_item.destroy
+    redirect_to profile_path(current_user), :notice => "Donation removed successfully."
+  end
+
+  def update_subcategories
+    category = Category.find(params[:category_id])
+    subcategories = category.subcategories
+    render :update do |page|
+      page.replace_html 'subcategories', :partial => 'subcategories', :object => subcategories
+    end
+  end
+
+  def donate
+    @donor_item = DonorItem.new
+    categories_and_subcategories
+    @needed_item = NeededItem.find(params[:id])
   end
 
   private
 
-  # def node_params
-  #   params.require(:node).permit(:title, :content, :parent_node)
-  # end
+  def donor_item_params
+    params.require(:donor_item).permit(:name, :description, :oversized, :pickup_details, :subcategory_id, :needed_item_id)
+  end
 end

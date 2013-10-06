@@ -1,8 +1,14 @@
+require 'googleajax'
+GoogleAjax.referer = "http://localhost:3000"
+GoogleAjax.api_key = "AIzaSyARQ7tB58L6RZ5bEZWju0Gu71eY4t4vj6o"
+
 class NeededItemsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
+  skip_before_filter :verify_authenticity_token
 
   def index
     @needed_items = NeededItem.all
+    categories_and_subcategories
   end
 
   def show
@@ -10,63 +16,88 @@ class NeededItemsController < ApplicationController
   end
 
   def new
-    # @parent_node = params[:id] if params[:id]
-    # @story = Story.new
-    # @story.build_node
+    @needed_item = NeededItem.new
+    categories_and_subcategories
   end
 
   def create
-    # story_params = {}
-    # process_upload
-    # story_params[:title] = node_params[:title]
-    # @story = Story.new(story_params)
-    # @story.user = current_user
-    # create_nodes
-    # @story.tag_list = params[:story][:tag_list]
-    # if @story.save
-    #   redirect_to story_path(@story), :notice => "#{@story.title} was created successfully."
-    # else
-    #   render :new, :alert => "Story could not be saved. Please see the errors below."
-    # end
+    @needed_item = NeededItem.create(needed_item_params)
+    if params[:subcategory_id] and params["subcategory_id"] != ""
+      @needed_item.subcategory = Subcategory.find(params[:subcategory_id])
+    end
+    if params[:image_url] && params[:image_url] != ""
+      @needed_item.image_url = params[:image_url]
+    else
+      @needed_item.image_url = GoogleAjax::Search.images(needed_item_params[:name])[:results][0][:url] rescue Photo.all.sample.image_url
+    end
+    @needed_item.still_needed = 2
+    @needed_item.user = current_user
+    @needed_item.save
+    redirect_to new_needed_item_path, :notice => "#{@needed_item.name} was added successfully."
   end
 
   def edit
-    # @story = Node.find(params[:id]).stories.first
-    # populate_edit_fields
+    @needed_item = NeededItem.find(params[:id])
+    categories_and_subcategories
+    populate_needed_item_edit_fields
   end
 
   def update
-    # @story_params = {}
-    # @story = Story.find(params[:id])
-    # if @story.user == current_user
-    #   process_upload
-    #   if params[:story] && params[:story][:upload]
-    #     edit_page_upload
-    #     flash.now[:success] = "File uploaded! Please edit for formatting as you see fit."
-    #     render :edit
-    #   else
-    #     update_story
-    #     update_node
-    #     if @story.update_attributes(@story_params)
-    #       redirect_to story_path(@story.node), :notice => "#{@story.title} was updated successfully."
-    #     else
-    #       render :edit, :alert => "Updates could not be saved. Please see the errors below."
-    #     end
-    #   end
-    # else
-    #   redirect_to profile_path(current_user), :notice => "You don't own this part of the story!"
-    # end
+    @needed_item = NeededItem.find(params[:id])
+    if @needed_item.user == current_user
+      update_needed_item
+      if params[:subcategory_id] and params["subcategory_id"] != ""
+        @needed_item.subcategory = Subcategory.find(params[:subcategory_id])
+      end
+      if params[:image_url] && params[:image_url] != ""
+        @needed_item.image_url = params[:image_url]
+      end
+      @needed_item.save
+      if @needed_item.need
+        redirect_to edit_need_path(@needed_item.need), :notice => "#{@needed_item.name} was updated successfully."
+      else
+        redirect_to needed_item_path(@needed_item), :notice => "#{@needed_item.name} was updated successfully."
+      end
+    else
+      redirect_to profile_path(current_user), :notice => "This isn't one of your needed items!"
+    end
   end
 
   def destroy
-    # story = Story.find(params[:id])
-    # story.destroy
-    # redirect_to stories_path, :notice => "Story removed successfully."
+    @needed_item = NeededItem.find(params[:id])
+    need = @needed_item.need if @needed_item.need
+    @needed_item.destroy
+    if need
+      redirect_to need_path(need), :notice => "Needed item removed successfully."
+    else
+      redirect_to profile_path(current_user), :notice => "Needed item removed successfully."
+    end
+  end
+
+  def update_subcategories
+    category = Category.find(params[:category_id])
+    subcategories = category.subcategories
+    render :update do |page|
+      page.replace_html 'subcategories', :partial => 'subcategories', :object => subcategories
+    end
+  end
+
+  def images
+    result = GoogleAjax::Search.images(params[:term])[:results]
+    urls = []
+    result.each do |result|
+      urls.append(result[:url])
+    end
+    render :json => urls
+  end
+
+  def search
+    @found_items = NeededItem.fuzzy_search(name: params[:search_items], description: params[:search_items])
   end
 
   private
 
-  # def node_params
-  #   params.require(:node).permit(:title, :content, :parent_node)
-  # end
+  def needed_item_params
+    params.require(:needed_item).permit(:name, :description, :image_url, :oversized, :subcategory_id, :need_id)
+  end
 end

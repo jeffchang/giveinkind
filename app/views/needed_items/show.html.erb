@@ -1,0 +1,19 @@
+<div id="row">
+  <div class="small-12 columns">
+    <h2><%= @needed_item.name %></h2>
+    <% if needed_item.user && needed_item.user.name != "" %>
+      <p><i>by <%= @needed_item.user.name %></i></p>
+    <% end %>
+    <%= @needed_item.description.html_safe %>
+    <br>
+
+    <% if @needed_item.subcategory %>
+      <p>Category: <%= @needed_item.subcategory.category + " - " + @needed_item.subcategory %></p>
+    <% end %>
+    <% if @needed_item.need %>
+      <p>Part of <%= link_to @needed_item.need.title, need_path(@needed_item.need) %></p>
+    <% end %>
+    <br>
+    <h3><%= link_to "Donate this item!", "/donor_items/donate/#{@needed_item.id}", class: "round large success button" %>
+  </div>
+</div>
