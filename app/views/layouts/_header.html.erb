@@ -5,7 +5,7 @@
         <a href="/"><h1 class="logo">Give In Kind</h1></a>
         <ul class="primary-nav">
             <% if !current_user || !current_user.facilitator %>
-                <li><%= link_to "About Us", "/static_pages/about_us" %></li>
+                <li><%= link_to "About Us", "/static/about_us" %></li>
                 <li>
                     <a href="#">Browse</a>
                     <ul>
@@ -15,17 +15,17 @@
                 </li>
                 <li><%= link_to "Needed Items", needed_items_path %></li>
                 <li><%= link_to "Donate", new_donor_item_path %></li>
-                <li><%= link_to "Blog", "/static_pages/blog" %></li>
-                <li><%= link_to "FAQs", "/static_pages/faqs" %></li>
+                <li><%= link_to "Blog", "/static/blog" %></li>
+                <li><%= link_to "FAQs", "/static/faqs" %></li>
                 <li><%= link_to "Donations", donor_items_path %></li>
-                <li><%= link_to "Contact", "/static_pages/contact" %></li>
+                <li><%= link_to "Contact", "/static/contact" %></li>
             <% else %>
                 <li><%= link_to "Donors to Thank", donor_items_path %></li>
                 <li><%= link_to "Donations", donor_items_path %></li>
                 <li><%= link_to "Browse Needs", needs_path %></li>
                 <li><%= link_to "Needed Items", needed_items_path %></li>
                 <li><%= link_to "Donate", new_donor_item_path %></li>
-                <li><%= link_to "Contact", "/static_pages/contact" %></li>
+                <li><%= link_to "Contact", "/static/contact" %></li>
             <% end %>
             <% if current_user %>
                 <li><%= link_to "My Profile", profile_path(current_user) %></li>

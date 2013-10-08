@@ -7,7 +7,7 @@ module ItemHelper
     @existing_image = @donor_item.image_url
     @existing_oversized = @donor_item.oversized
     @existing_details = @donor_item.pickup_details
-    @existing_subcategory = @donor_item.subcategory_id
+    @existing_subcategory = @donor_item.subcategory
     @existing_needed_item_id = @donor_item.needed_item_id
     @existing_thanks = @donor_item.thanks
   end
@@ -18,7 +18,7 @@ module ItemHelper
     @existing_status = @needed_item.still_needed
     @existing_image = @needed_item.image_url
     @existing_oversized = @needed_item.oversized
-    @existing_subcategory = @needed_item.subcategory_id
+    @existing_subcategory = @needed_item.subcategory
     @existing_need_id = @needed_item.need_id
   end
 

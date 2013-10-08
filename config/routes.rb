@@ -1,6 +1,6 @@
 Giveinkind::Application.routes.draw do
   
-  root "static_pages#index"
+  root "static#index"
   devise_for :users, :controllers => {:registrations => "registrations",
                                       :omniauth_callbacks => "users/omniauth_callbacks"}
 
@@ -19,15 +19,15 @@ Giveinkind::Application.routes.draw do
   resources :profiles, :only => [:show]
 
   get "needed_items/newinneed/:need_id" => "needed_items#new"
-  get "static_pages/about_us" => "static_pages#about_us"
-  get "static_pages/blog" => "static_pages#blog"
-  get "static_pages/faqs" => "static_pages#faqs"
-  get "static_pages/contact" => "static_pages#contact"
-  get "static_pages/index" => "static_pages#index"
-  get "static_pages/offered" => "static_pages#offered"
-  get "static_pages/browse" => "static_pages#browse"
-  get "static_pages/donate" => "static_pages#donate"
-  get "static_pages/category" => "static_pages#category"
+  get "static/about_us" => "static#about_us"
+  get "static/blog" => "static#blog"
+  get "static/faqs" => "static#faqs"
+  get "static/contact" => "static#contact"
+  get "static/index" => "static#index"
+  get "static/offered" => "static#offered"
+  get "static/browse" => "static#browse"
+  get "static/donate" => "static#donate"
+  get "static/category" => "static#category"
 
   resources :locations
   resources :profiles, :only => [:show, :edit]
