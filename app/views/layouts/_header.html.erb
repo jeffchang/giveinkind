@@ -4,7 +4,7 @@
     <header class="header">
         <a href="/"><h1 class="logo">Give In Kind</h1></a>
         <ul class="primary-nav">
-            <% if !current_user || !current_user.facilitator %>
+            <% unless current_user && current_user.facilitator %>
                 <li><%= link_to "About Us", "/static/about_us" %></li>
                 <li>
                     <a href="#">Browse</a>
@@ -14,7 +14,11 @@
                     </ul>
                 </li>
                 <li><%= link_to "Needed Items", needed_items_path %></li>
-                <li><%= link_to "Donate", new_donor_item_path %></li>
+                <% if current_user %>
+                    <li><%= link_to "Donate", new_donor_item_path %></li>
+                <% else %>
+                    <li><%= link_to "Donate", "/static/donate" %></li>
+                <% end %>
                 <li><%= link_to "Blog", "/static/blog" %></li>
                 <li><%= link_to "FAQs", "/static/faqs" %></li>
                 <li><%= link_to "Donations", donor_items_path %></li>
