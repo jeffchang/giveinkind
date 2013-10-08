@@ -1,6 +1,7 @@
 class StaticController < ApplicationController
 
   skip_before_action :authenticate_user!
+  before_action :assign_path
   
   def welcome
   end
@@ -20,16 +21,16 @@ class StaticController < ApplicationController
   def index
   end
 
-  def offered
-  end
-
-  def browse
-  end
-
   def donate
   end
 
   def category
+  end
+
+  private
+
+  def assign_path
+    @static_path = params[:action] if (current_user && current_user.facilitator)
   end
   
 end

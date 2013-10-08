@@ -18,4 +18,6 @@
 //= require jquery.ui.effect.all
 //= require introjs
 //= require_tree ../../../vendor/assets/javascripts/.
-//= require_tree .
+//= require foundation_init
+//= require infinite
+//= require search_images

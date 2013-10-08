@@ -26,6 +26,9 @@
                 <li><%= link_to "Needed Items", needed_items_path %></li>
                 <li><%= link_to "Donate", new_donor_item_path %></li>
                 <li><%= link_to "Contact", "/static/contact" %></li>
+                <% if @static_path %>
+                    <li><%= link_to "Edit Page", "/editor/static/#{@static_path}" %></li>
+                <% end %>
             <% end %>
             <% if current_user %>
                 <li><%= link_to "My Profile", profile_path(current_user) %></li>

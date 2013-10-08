@@ -7,7 +7,12 @@
 <div class="row">
 
 	<div class="large-4 columns">
-		<h2 class="button-heading"><%= link_to "Donate", new_donor_item_path, class: 'button expand' %></h2>
+			<% if !current_user %>
+        <%= link_to "Donate", "/static/donate", class: "button expand" %>
+	    <% else %>
+        <%= link_to "Donate", new_donor_item_path, class: 'button expand' %>
+  	  <% end %>
+  	</h2>
 		<p>Aliquam habitasse! Sed! Turpis eu integer amet rhoncus etiam, adipiscing porttitor platea ut pulvinar. Elit risus porta. Urna pulvinar, sit urna in velit ac est, ridiculus aenean risus? Aenean sit aliquet magna dis ultricies penatibus.</p>
 	</div>
 

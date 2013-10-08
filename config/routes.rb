@@ -1,5 +1,9 @@
 Giveinkind::Application.routes.draw do
   
+    namespace :mercury do
+      resources :images
+    end
+  mount Mercury::Engine => '/'
   root "static#index"
   devise_for :users, :controllers => {:registrations => "registrations",
                                       :omniauth_callbacks => "users/omniauth_callbacks"}
@@ -24,8 +28,6 @@ Giveinkind::Application.routes.draw do
   get "static/faqs" => "static#faqs"
   get "static/contact" => "static#contact"
   get "static/index" => "static#index"
-  get "static/offered" => "static#offered"
-  get "static/browse" => "static#browse"
   get "static/donate" => "static#donate"
   get "static/category" => "static#category"
 

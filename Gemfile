@@ -62,3 +62,5 @@ gem 'prototype-rails'
 gem 'introjs-rails'
 gem 'googleajax'
 gem 'flickraw'
+gem 'mercury-rails', git: 'https://github.com/jejacks0n/mercury.git', ref:"9b722b1706"
+gem 'paperclip'

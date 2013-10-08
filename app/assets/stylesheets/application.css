@@ -11,7 +11,13 @@
  *= require_self
  *= require normalize
  *= require foundation_and_overrides
- *= require_tree .
+ *= require layout
+ *= require nav
+ *= require search
+ *= require isotope_filtering
+ *= require listings
+ *= require input_formatting
+ *= require images
  *= require jquery.ui.core
  *= require jquery.ui.theme
  *= require introjs
