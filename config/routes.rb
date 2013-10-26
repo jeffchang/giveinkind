@@ -1,12 +1,21 @@
 Giveinkind::Application.routes.draw do
   
-    namespace :mercury do
-      resources :images
-    end
+  namespace :mercury do
+    resources :images
+  end
+
   mount Mercury::Engine => '/'
+
+  resources :pages do
+    member { post :mercury_update}
+  end
+  
   root "static#index"
+
   devise_for :users, :controllers => {:registrations => "registrations",
                                       :omniauth_callbacks => "users/omniauth_callbacks"}
+
+  put "static/:label" => "pages#mercury_update"
 
   post "needs/search" => "needs#search"
   post "needed_items/search" => "needed_items#search"
@@ -21,6 +30,9 @@ Giveinkind::Application.routes.draw do
   resources :donor_items
   resources :collection_spots
   resources :profiles, :only => [:show]
+  resources :pages do
+    member { post :mercury_update }
+  end
 
   get "needed_items/newinneed/:need_id" => "needed_items#new"
   get "static/about_us" => "static#about_us"
@@ -34,6 +46,9 @@ Giveinkind::Application.routes.draw do
   resources :locations
   resources :profiles, :only => [:show, :edit]
 
+  %w( 404 422 500 ).each do |code|
+    get code, :to => "errors#show", :code => code
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

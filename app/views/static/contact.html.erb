@@ -1,8 +1,8 @@
 <div class="wrapper wrapper-darker">
   <div class="row">
     <div class="welcome-text">
-      <h1>Contact Us</h1>
-      <p>Turpis pellentesque? Integer dignissim nascetur, scelerisque dignissim pulvinar urna tincidunt etiam non pid urna urna rhoncus.</p>
+      <h1><span id="page_heading" data-mercury="full"><%= raw @page.heading %></span></h1>
+      <span id="page_caption" data-mercury="full"><%= raw @page.caption %></span>
     </div>
   </div>
 </div>
@@ -11,9 +11,9 @@
 
 	<div class="large-8 columns">
 
-    <h2>Enquiry Form</h2>
+    <h2><span id="page_subheading_1" data-mercury="full"><%= raw @page.subheading_1 %></span></h2>
 
-    <p>Turpis pellentesque? Integer dignissim nascetur, scelerisque dignissim pulvinar urna tincidunt etiam non pid urna urna rhoncus.</p>
+    <span id="page_opening_1" data-mercury="full"><%= raw @page.opening_1 %></span>
 
 		<form>
 

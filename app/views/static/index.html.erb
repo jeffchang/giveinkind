@@ -1,6 +1,8 @@
 <div class="wrapper wrapper-intro wrapper-intro-home wrapper-darker">
 	<div class="row">
-			<h1 class="large-8 columns">Make sure your unwanted goods go where the need is</h1>
+			<h1 class="large-8 columns">
+				<span id="page_heading" data-mercury="full"><%= raw @page.heading %></span>
+			</h1>
 	</div>
 </div>
 
@@ -13,17 +15,17 @@
         <%= link_to "Donate", new_donor_item_path, class: 'button expand' %>
   	  <% end %>
   	</h2>
-		<p>Aliquam habitasse! Sed! Turpis eu integer amet rhoncus etiam, adipiscing porttitor platea ut pulvinar. Elit risus porta. Urna pulvinar, sit urna in velit ac est, ridiculus aenean risus? Aenean sit aliquet magna dis ultricies penatibus.</p>
+		<span id="page_opening_1" data-mercury="full"><%= raw @page.opening_1 %></span>
 	</div>
 
 	<div class="large-4 columns">
 	<h2 class="button-heading"><%= link_to "Needed Items", needed_items_path, class: 'button expand' %></h2>
-		<p>Aliquam habitasse! Sed! Turpis eu integer amet rhoncus etiam, adipiscing porttitor platea ut pulvinar. Elit risus porta. Urna pulvinar, sit urna in velit ac est, ridiculus aenean risus? Aenean sit aliquet magna dis ultricies penatibus.</p>
+		<span id="page_opening_2" data-mercury="full"><%= raw @page.opening_2 %></span>
 	</div>
 
 	<div class="large-4 columns">
 	<h2 class="button-heading"><%= link_to "Need Help?", "/static/contact", class: 'button expand' %></h2>
-		<p>Aliquam habitasse! Sed! Turpis eu integer amet rhoncus etiam, adipiscing porttitor platea ut pulvinar. Elit risus porta. Urna pulvinar, sit urna in velit ac est, ridiculus aenean risus? Aenean sit aliquet magna dis ultricies penatibus.</p>
+		<span id="page_opening_3" data-mercury="full"><%= raw @page.opening_3 %></span>
 	</div>
 
 </div>
@@ -35,8 +37,8 @@
 		<img src="/assets/how_you_can_help.jpg" alt="" class="large-4 columns">
 
 		<div class="large-8 columns">
-			<h2>How you can help</h2>
-			<p>Aliquam habitasse! Sed! Turpis eu integer amet rhoncus etiam, adipiscing porttitor platea ut pulvinar. Elit risus porta. Urna pulvinar, sit urna in velit ac est, ridiculus aenean risus? Aenean sit aliquet magna dis ultricies penatibus. Aliquam habitasse! Sed! Turpis eu integer amet rhoncus etiam, adipiscing porttitor platea ut pulvinar. Elit risus porta. Urna pulvinar, sit urna in velit ac est, ridiculus aenean risus? Aenean sit aliquet magna dis ultricies penatibus.</p>
+			<h2><span id="page_subheading_1" data-mercury="full"><%= raw @page.subheading_1 %></span></h2>
+			<span id="page_content_1" data-mercury="full"><%= raw @page.content_1 %></span>
 			<p><a href="">Find out more</a></p>
 		</div>
 

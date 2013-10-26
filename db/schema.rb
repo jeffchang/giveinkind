@@ -11,11 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131008152634) do
+ActiveRecord::Schema.define(version: 20131008215211) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "pg_trgm"
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -102,6 +101,23 @@ ActiveRecord::Schema.define(version: 20131008152634) do
     t.integer  "complete"
     t.text     "thanks"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pages", force: true do |t|
+    t.string   "label"
+    t.string   "heading"
+    t.text     "caption"
+    t.string   "subheading_1"
+    t.text     "opening_1"
+    t.text     "content_1"
+    t.string   "subheading_2"
+    t.text     "opening_2"
+    t.text     "content_2"
+    t.string   "subheading_3"
+    t.text     "opening_3"
+    t.text     "content_3"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

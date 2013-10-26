@@ -31,7 +31,7 @@
                 <li><%= link_to "Donate", new_donor_item_path %></li>
                 <li><%= link_to "Contact", "/static/contact" %></li>
                 <% if @static_path %>
-                    <li><%= link_to "Edit Page", "/editor/static/#{@static_path}" %></li>
+                    <li><%= link_to "Edit Page", "/editor/static/#{@static_path}", id: "edit-link", data: { save_url: mercury_update_page_path(@page) } %></li>
                 <% end %>
             <% end %>
             <% if current_user %>
